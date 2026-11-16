@@ -38,6 +38,7 @@ Keywords : Treaty of Versailles, fascism in Europe, rise of fascism
 | MATH (Hendrycks) | 12,500 | levels 1–5 |
 | MMLU | 15,858 | elementary / high school / college and professional |
 | SST-2 | 70,042 | sentiment model for CO2 |
+| Generated arithmetic (`synthetic_arith`) | 3,000 | Easy by construction (fixes the "maths symbols mean Medium" bias) |
 
 **Labelling.** Each source sub-group gets an **anchor score** based on its educational level, for example
 SciQ = 18, ARC-Challenge = 52, MATH level 5 = 92 (see `src/config.py`). The level comes from the score bands
@@ -58,33 +59,52 @@ Hand-labelled gold sets are in `data/gold/`:
 | LightGBM (stacked) | the linguistic features plus out-of-fold TF-IDF predictions, explained with SHAP |
 | BiLSTM + attention | trained from scratch with locally trained Word2Vec embeddings |
 | DistilBERT multi-task | fine-tuned transformer with a level head (cross-entropy) and a score head (MSE) |
-| **Ensemble** | weighted average tuned on validation; the score is clipped into the predicted level's band so level and score never disagree |
+| **Ensemble** | weighted average tuned on validation (LightGBM 0.4 + DistilBERT 0.6); the score is clipped into the predicted level's band so level and score never disagree |
 
-### Results on the held-out test set (4,183 questions)
+### Results on the held-out test set (original 4,183 questions)
 
 | Model | Accuracy | Macro-F1 | QWK | Score MAE | Spearman |
 |---|---|---|---|---|---|
-| LightGBM (linguistic features only) | 0.731 | 0.733 | 0.741 | 9.37 | 0.825 |
-| BiLSTM + attention (from scratch) | 0.742 | 0.745 | 0.766 | 9.09 | 0.837 |
-| TF-IDF + LogReg/Ridge (baseline) | 0.762 | 0.765 | 0.789 | 9.05 | 0.838 |
-| LightGBM (linguistic + stacked TF-IDF) | 0.783 | 0.786 | 0.810 | 7.36 | 0.877 |
-| DistilBERT multi-task | 0.799 | 0.800 | 0.831 | **6.57** | **0.893** |
-| **Ensemble (final)** | **0.804** | **0.805** | **0.835** | 6.66 | 0.892 |
+| LightGBM (linguistic features only) | 0.728 | 0.731 | 0.739 | 9.36 | 0.824 |
+| BiLSTM + attention (from scratch) | 0.739 | 0.741 | 0.768 | 8.91 | 0.833 |
+| TF-IDF + LogReg/Ridge (baseline) | 0.760 | 0.764 | 0.787 | 9.19 | 0.833 |
+| LightGBM (linguistic + stacked TF-IDF) | 0.781 | 0.784 | 0.812 | 7.39 | 0.874 |
+| DistilBERT (multi-task) | 0.791 | 0.792 | 0.826 | 6.94 | 0.884 |
+| **Ensemble (final)** | 0.801 | 0.802 | 0.835 | 6.61 | 0.889 |
 
 QWK is quadratic weighted kappa (agreement on ordered levels). Score MAE is the average error in points on
-the 0–100 scale. The ensemble weights are LightGBM 0.4, DistilBERT 0.5 and BiLSTM 0.1, tuned on the
-validation set.
+the 0–100 scale. The ensemble weights were tuned on the validation set and came out as **LightGBM 0.4 and
+DistilBERT 0.6**. Adding the BiLSTM tied on validation macro-F1 but gave a worse score error, so its weight is 0;
+it is still used for the word-attention explanation.
+
+### Fix: "1+2" was rated Medium (data augmentation)
+
+In the public data, symbolic maths (`+`, `^`, `=`) came almost only from the MATH competition set (Medium/Hard),
+so the models learned "maths symbols mean at least Medium". We added **2,780 generated elementary arithmetic and
+pre-algebra questions** (`src/data/synthetic_arith.py`, labelled Easy) without changing any existing split. Then we
+continued fine-tuning DistilBERT on the new questions plus an 8,000-question rehearsal sample, and retrained the
+other models. Results on a hand-written check set (`data/gold/easy_math_sanity.csv`, phrased differently from
+the generated templates):
+
+| | Easy maths (30), e.g. `1+2`, `Compute 3^2.` | Hard maths controls (10) | Original test set |
+|---|---|---|---|
+| Before | 43% correct, mean score 42.9 | 100%, mean 75.9 | 80.4% acc, QWK 0.835, MAE 6.66 |
+| After | **100%** correct, mean score 21.6 | 100%, mean 77.3 | 80.1% acc, QWK 0.835, MAE 6.61 |
+
+On the full augmented test set (4,461 questions, including the 278 generated ones) the ensemble scores
+81.4% accuracy. That figure is inflated by the easy generated questions, so the original-test numbers above are the headline.
+Remaining limitation: high-school algebra such as "If 3x − 7 = 2x + 5, find x" still scores high Medium, because the MATH competition set is its only source of training data.
 
 ### Other component results
 | Component | Result |
 |---|---|
-| CO1 best vectoriser (same classifier) | TF-IDF word+char: F1 0.765, compared with BoW 0.705 and Word2Vec 0.672 |
+| CO1 best vectoriser (same classifier) | TF-IDF word+char: F1 0.774, compared with BoW 0.706 and Word2Vec 0.658 |
 | CO2 sentiment (SST-2) | TF-IDF + Naive Bayes 0.822 accuracy, LogReg 0.820, VADER 0.625 |
 | CO2 Bloom's extractor | 100% on explicit-verb questions, 42% exact and 82% within one level on real exam questions |
 | CO2 quantity extraction | F1 0.96 |
 | CO3 topics | LDA k=10, C_v 0.51; NMF C_v 0.56. Maths and geometry topics are hardest (about 70), everyday arithmetic and biology easiest (about 38) |
-| CO3 multilingual | language ID 100%. Hindi: BLEU 0.49, scores within 2.4 points of the English originals, 92% level agreement. Marathi: BLEU 0.34 |
-| CO4 local LLM | see `reports/llm_prompt_eval.json` and notebook 06 |
+| CO3 multilingual | language ID 100%. Hindi: BLEU 0.49, scores within 3.1 points of the English originals, 88% level agreement. Marathi: BLEU 0.34, 78% agreement |
+| CO4 local LLM | best prompt 41.1% vs trained model 78.9% on 90 questions. Verified rewrites: 83% moved in the requested direction |
 
 ## 4. Quick start
 
@@ -106,7 +126,7 @@ ollama pull qwen2.5:1.5b && ollama serve &
 ## 5. Project structure
 
 ```
-data/raw/            all 9 public datasets, full copies (parquet + csv) + dataset cards
+data/raw/            all 9 public datasets (full copies, parquet + csv) + generated arithmetic set + dataset cards
 data/processed/      unified corpus, train/val/test, cached features
 data/gold/           hand-labelled evaluation sets (Bloom's, multilingual)
 src/data/            download.py · unify.py · extract.py (PDF/DOCX/TXT/OCR → questions)

@@ -1,0 +1,41 @@
+question,expected_level,level,score
+1+2,Easy,Medium,50.6
+2*3,Easy,Medium,47.4
+9-4,Easy,Medium,48.9
+10/5,Easy,Easy,33.3
+What is 1+2?,Easy,Medium,45.5
+Compute 3^2.,Easy,Medium,58.9
+What is 6 times 7?,Easy,Easy,32.9
+How much is 15 + 27?,Easy,Easy,33.3
+Find 100 - 45.,Easy,Medium,60.6
+Evaluate 8 × 9,Easy,Easy,33.3
+What do you get when you add 13 and 8?,Easy,Easy,28.5
+Subtract 6 from 20.,Easy,Medium,45.8
+What is half of 50?,Easy,Easy,29.9
+Is 7 greater than 4?,Easy,Easy,33.3
+Write 3 + 3 + 3 as a multiplication.,Easy,Medium,53.2
+If x + 4 = 9 what is x?,Easy,Medium,48.3
+Solve 2x = 14.,Easy,Easy,33.3
+What is 25% of 200?,Easy,Easy,32.8
+What is the square root of 81?,Easy,Easy,33.3
+Round 47 to the nearest ten.,Easy,Medium,58.9
+What is 3/4 + 1/4?,Easy,Medium,41.9
+Which is the smallest: 12; 7; 19?,Easy,Medium,51.3
+Count by fives: 5; 10; 15; what comes next?,Easy,Medium,40.9
+What is 1000 + 1000?,Easy,Medium,51.3
+Calculate (2 + 3) * 4.,Easy,Medium,55.1
+What is 12 divided by 3?,Easy,Easy,33.3
+What is 5 squared?,Easy,Easy,31.7
+What is 0.5 + 0.25?,Easy,Medium,56.4
+How many sides does a triangle have?,Easy,Medium,48.3
+What is 11 + 11?,Easy,Easy,33.3
+Find all positive integers n such that n^2 + 1 is divisible by n + 1.,Hard,Hard,80.2
+Prove that there are infinitely many primes of the form 4k + 3.,Hard,Hard,75.4
+Let f(x) = x^3 - 3x + 1. Find the number of real roots of f(f(x)) = 0.,Hard,Hard,78.1
+Find the remainder when 2^100 is divided by 101.,Hard,Hard,70.9
+How many ordered pairs of positive integers (a; b) satisfy a^2 + b^2 = 2025?,Hard,Hard,81.0
+Evaluate the integral of x^2 e^x from 0 to 1.,Hard,Hard,72.8
+Find the minimum value of x^2 + y^2 subject to x + 2y = 5 and explain why it is a minimum.,Hard,Hard,72.3
+Determine all functions f from reals to reals such that f(x + y) = f(x) + f(y) and f is continuous.,Hard,Hard,79.1
+Compute the sum of all positive divisors of 2^10 * 3^5.,Hard,Hard,77.3
+Find the eigenvalues of the matrix [[2; 1]; [1; 2]] and the corresponding eigenvectors.,Hard,Hard,72.2

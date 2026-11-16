@@ -1,36 +1,36 @@
 lang,question,english_reference,expected_level,detected,english_mt,level_mt,score_mt,level_ref,score_ref,bleu
-hi,पानी का रासायनिक सूत्र क्या है?,What is the chemical formula of water?,Easy,hi,What is the chemical formula of water?,Easy,23.5,Easy,23.5,1.0
-hi,भारत की राजधानी क्या है?,What is the capital of India?,Easy,hi,What is the capital of India?,Easy,29.0,Easy,29.0,1.0
-hi,सूर्य किस दिशा में उगता है?,In which direction does the sun rise?,Easy,hi,In what direction does the sun spring?,Easy,30.9,Easy,33.3,0.38260294162784475
-hi,एक सप्ताह में कितने दिन होते हैं?,How many days are there in a week?,Easy,hi,How many days are there in a week?,Easy,31.6,Easy,31.6,1.0
-hi,पौधे अपना भोजन किस प्रक्रिया से बनाते हैं?,By which process do plants make their food?,Easy,hi,By what process do plants plant their food?,Easy,25.0,Easy,30.9,0.31020161970069987
-hi,गाय कौन सा जानवर है?,What kind of animal is a cow?,Easy,hi,Which animal is the cow?,Easy,33.3,Easy,29.0,0.16449759298465816
-hi,राम के पास 5 सेब हैं और उसने 2 खा लिए। अब उसके पास कितने सेब बचे हैं?,Ram has 5 apples and he ate 2. How many apples does he have left now?,Easy,hi,Ram has 5 apples and he ate 2. How many bucks he now has?,Easy,29.0,Easy,28.4,0.6116565986936957
-hi,हमारे सौर मंडल में कितने ग्रह हैं?,How many planets are there in our solar system?,Easy,hi,How many planets are in our solar system?,Easy,31.1,Easy,28.3,0.6690484408935986
-hi,प्रकाश संश्लेषण में क्लोरोफिल की भूमिका समझाइए।,Explain the role of chlorophyll in photosynthesis.,Medium,hi,Explain the role of chlorophyll in light variety.,Medium,39.6,Medium,40.4,0.6104735835807844
-hi,एक कार 2 घंटे में 120 किलोमीटर चलती है। उसकी औसत गति क्या है?,A car travels 120 kilometres in 2 hours. What is its average speed?,Medium,hi,A car runs 120 miles in 2 hours. What's his average speed?,Medium,46.1,Medium,52.3,0.3446073377034663
-hi,लोकतंत्र और राजतंत्र में क्या अंतर है?,What is the difference between democracy and monarchy?,Medium,hi,What is the difference between democracy and politics?,Medium,45.0,Medium,46.4,0.7506238537503395
-hi,अम्ल और क्षार के बीच अंतर स्पष्ट कीजिए।,Explain the difference between an acid and a base.,Medium,hi,Make clear the difference between acid and Klotur.,Medium,42.5,Medium,40.0,0.2090067144241744
-hi,न्यूटन के गति के तीसरे नियम को एक उदाहरण सहित समझाइए।,Explain Newton's third law of motion with an example.,Medium,hi,Explain Newton's third law with an example.,Medium,45.4,Medium,41.4,0.6432188699036832
-hi,समीकरण 3x + 7 = 22 को हल कीजिए।,Solve the equation 3x + 7 = 22.,Medium,hi,Solve equation 3x + 7 = 22.,Easy,33.3,Easy,33.3,0.767279645960659
-hi,पृथ्वी पर ऋतुएँ क्यों बदलती हैं?,Why do seasons change on Earth?,Medium,hi,Why do seasons change?,Medium,36.4,Easy,33.3,0.47398785011707933
-hi,फ्रांसीसी क्रांति के मुख्य कारणों का वर्णन कीजिए।,Describe the main causes of the French Revolution.,Medium,hi,Describe the main causes of the French revolution.,Medium,43.2,Medium,42.8,1.0
-hi,सिद्ध कीजिए कि 2 का वर्गमूल एक अपरिमेय संख्या है।,Prove that the square root of 2 is an irrational number.,Hard,hi,Complete that square root of 2 is an inevitable number.,Medium,66.6,Hard,71.0,0.4883499409416459
-hi,मौद्रिक नीति का मुद्रास्फीति और बेरोजगारी पर प्रभाव का मूल्यांकन कीजिए।,Evaluate the effect of monetary policy on inflation and unemployment.,Hard,hi,Appreciate the effect on the U.S. public policy's welfare and the career.,Medium,51.0,Medium,52.7,0.05653041175801491
-hi,क्वांटम उलझाव की अवधारणा का विश्लेषण कीजिए और इसके प्रायोगिक प्रमाणों की चर्चा कीजिए।,Analyze the concept of quantum entanglement and discuss its experimental evidence.,Hard,hi,Analyze the concept of Quantine and discuss its practical evidence.,Hard,72.6,Hard,69.5,0.3453155548318878
-hi,"ऐसे सभी धनात्मक पूर्णांक n ज्ञात कीजिए जिनके लिए n^2 + 1, n + 1 से विभाज्य है।",Find all positive integers n for which n^2 + 1 is divisible by n + 1.,Hard,hi,"Make sure all positive integers are divisible by n+ 1, n + 1.",Hard,73.3,Hard,78.9,0.3532561653102664
-hi,दो चरों वाले रैखिक प्रतिगमन मॉडल में बहुसंरेखता की समस्या का आकलन कीजिए।,Assess the problem of multicollinearity in a linear regression model with two variables.,Hard,hi,Identify the problem of multidivision in two variables Racky model.,Hard,75.6,Hard,78.7,0.1502000462870979
-hi,एंजाइम की गतिकी में माइकेलिस-मेंटेन समीकरण की व्युत्पत्ति कीजिए।,Derive the Michaelis-Menten equation in enzyme kinetics.,Hard,hi,Mueium's speed of Mikeis-in-a-law equation.,Hard,66.7,Hard,66.7,0.040161384364076534
-hi,संवैधानिक कानून में न्यायिक समीक्षा के सिद्धांत की आलोचनात्मक व्याख्या कीजिए।,Critically explain the doctrine of judicial review in constitutional law.,Hard,hi,Describe the critical principle of a judicial review in the constitution law.,Hard,67.2,Hard,73.1,0.15727800941615355
-hi,एक अवकल समीकरण dy/dx = xy को हल कीजिए जहाँ y(0) = 1 है।,Solve the differential equation dy/dx = xy where y(0) = 1.,Hard,hi,Angular equation is dy/dx = xy where y is = 1.,Medium,64.1,Medium,64.0,0.4394900482337441
-mr,पाण्याचे रासायनिक सूत्र काय आहे?,What is the chemical formula of water?,Easy,mr,What is the source of the water?,Medium,36.3,Easy,23.5,0.2705411345269699
-mr,भारताची राजधानी कोणती आहे?,What is the capital of India?,Easy,mr,What is India’s capital?,Easy,33.3,Easy,29.0,0.16515821590069038
-mr,एका आठवड्यात किती दिवस असतात?,How many days are there in a week?,Easy,mr,How many days are there in a week?,Easy,31.6,Easy,31.6,1.0
-mr,प्रकाशसंश्लेषणामध्ये क्लोरोफिलची भूमिका स्पष्ट करा.,Explain the role of chlorophyll in photosynthesis.,Medium,mr,Explain the role of chlorofyl in lighting.,Medium,40.0,Medium,40.4,0.38260294162784475
-mr,लोकशाही आणि राजेशाही यांमध्ये काय फरक आहे?,What is the difference between democracy and monarchy?,Medium,mr,What is the difference between the people and the kingdoms?,Easy,30.3,Medium,46.4,0.38163309113713373
-mr,पृथ्वीवर ऋतू का बदलतात?,Why do seasons change on Earth?,Medium,mr,Why the Change of Earth?,Easy,33.3,Easy,33.3,0.16341219448835542
-mr,सिद्ध करा की 2 चे वर्गमूळ ही अपरिमेय संख्या आहे.,Prove that the square root of 2 is an irrational number.,Hard,mr,Make sure that the square root of 2 is an infinite number.,Hard,73.7,Hard,71.0,0.6115380576901023
-mr,चलनविषयक धोरणाचा महागाई आणि बेरोजगारीवरील परिणामाचे मूल्यमापन करा.,Evaluate the effect of monetary policy on inflation and unemployment.,Hard,mr,Aim to place the suits in the order which fits the current layout most naturally.,Medium,43.5,Medium,52.7,0.029083177105737577
-mr,विकल समीकरण dy/dx = xy सोडवा जिथे y(0) = 1 आहे.,Solve the differential equation dy/dx = xy where y(0) = 1.,Hard,mr,"The square root of y/dx is equal to xy, where y(0) is equal to 1.",Hard,70.3,Medium,64.0,0.2179301929852717
-en,What is the chemical formula of water?,What is the chemical formula of water?,Easy,en,What is the chemical formula of water?,Easy,23.5,Easy,23.5,1.0
-en,Evaluate the effect of monetary policy on inflation and unemployment.,Evaluate the effect of monetary policy on inflation and unemployment.,Hard,en,Evaluate the effect of monetary policy on inflation and unemployment.,Medium,52.7,Medium,52.7,1.0
+hi,पानी का रासायनिक सूत्र क्या है?,What is the chemical formula of water?,Easy,hi,What is the chemical formula of water?,Easy,22.2,Easy,22.2,1.0
+hi,भारत की राजधानी क्या है?,What is the capital of India?,Easy,hi,What is the capital of India?,Easy,25.0,Easy,25.0,1.0
+hi,सूर्य किस दिशा में उगता है?,In which direction does the sun rise?,Easy,hi,In what direction does the sun spring?,Easy,29.3,Easy,32.9,0.38260294162784475
+hi,एक सप्ताह में कितने दिन होते हैं?,How many days are there in a week?,Easy,hi,How many days are there in a week?,Easy,23.1,Easy,23.1,1.0
+hi,पौधे अपना भोजन किस प्रक्रिया से बनाते हैं?,By which process do plants make their food?,Easy,hi,By what process do plants plant their food?,Easy,22.7,Easy,29.3,0.31020161970069987
+hi,गाय कौन सा जानवर है?,What kind of animal is a cow?,Easy,hi,Which animal is the cow?,Medium,35.8,Medium,33.4,0.16449759298465816
+hi,राम के पास 5 सेब हैं और उसने 2 खा लिए। अब उसके पास कितने सेब बचे हैं?,Ram has 5 apples and he ate 2. How many apples does he have left now?,Easy,hi,Ram has 5 apples and he ate 2. How many bucks he now has?,Easy,25.6,Easy,26.0,0.6116565986936957
+hi,हमारे सौर मंडल में कितने ग्रह हैं?,How many planets are there in our solar system?,Easy,hi,How many planets are in our solar system?,Easy,26.8,Easy,26.1,0.6690484408935986
+hi,प्रकाश संश्लेषण में क्लोरोफिल की भूमिका समझाइए।,Explain the role of chlorophyll in photosynthesis.,Medium,hi,Explain the role of chlorophyll in light variety.,Medium,41.0,Medium,37.6,0.6104735835807844
+hi,एक कार 2 घंटे में 120 किलोमीटर चलती है। उसकी औसत गति क्या है?,A car travels 120 kilometres in 2 hours. What is its average speed?,Medium,hi,A car runs 120 miles in 2 hours. What's his average speed?,Medium,45.8,Medium,47.4,0.3446073377034663
+hi,लोकतंत्र और राजतंत्र में क्या अंतर है?,What is the difference between democracy and monarchy?,Medium,hi,What is the difference between democracy and politics?,Medium,43.3,Medium,43.5,0.7506238537503395
+hi,अम्ल और क्षार के बीच अंतर स्पष्ट कीजिए।,Explain the difference between an acid and a base.,Medium,hi,Make clear the difference between acid and Klotur.,Medium,40.4,Easy,33.3,0.2090067144241744
+hi,न्यूटन के गति के तीसरे नियम को एक उदाहरण सहित समझाइए।,Explain Newton's third law of motion with an example.,Medium,hi,Explain Newton's third law with an example.,Medium,42.5,Medium,40.0,0.6432188699036832
+hi,समीकरण 3x + 7 = 22 को हल कीजिए।,Solve the equation 3x + 7 = 22.,Medium,hi,Solve equation 3x + 7 = 22.,Easy,24.0,Easy,25.4,0.767279645960659
+hi,पृथ्वी पर ऋतुएँ क्यों बदलती हैं?,Why do seasons change on Earth?,Medium,hi,Why do seasons change?,Medium,36.5,Easy,33.2,0.47398785011707933
+hi,फ्रांसीसी क्रांति के मुख्य कारणों का वर्णन कीजिए।,Describe the main causes of the French Revolution.,Medium,hi,Describe the main causes of the French revolution.,Medium,42.7,Medium,42.4,1.0
+hi,सिद्ध कीजिए कि 2 का वर्गमूल एक अपरिमेय संख्या है।,Prove that the square root of 2 is an irrational number.,Hard,hi,Complete that square root of 2 is an inevitable number.,Medium,63.5,Hard,72.9,0.4883499409416459
+hi,मौद्रिक नीति का मुद्रास्फीति और बेरोजगारी पर प्रभाव का मूल्यांकन कीजिए।,Evaluate the effect of monetary policy on inflation and unemployment.,Hard,hi,Appreciate the effect on the U.S. public policy's welfare and the career.,Medium,48.9,Medium,51.4,0.05653041175801491
+hi,क्वांटम उलझाव की अवधारणा का विश्लेषण कीजिए और इसके प्रायोगिक प्रमाणों की चर्चा कीजिए।,Analyze the concept of quantum entanglement and discuss its experimental evidence.,Hard,hi,Analyze the concept of Quantine and discuss its practical evidence.,Hard,76.4,Hard,72.4,0.3453155548318878
+hi,"ऐसे सभी धनात्मक पूर्णांक n ज्ञात कीजिए जिनके लिए n^2 + 1, n + 1 से विभाज्य है।",Find all positive integers n for which n^2 + 1 is divisible by n + 1.,Hard,hi,"Make sure all positive integers are divisible by n+ 1, n + 1.",Hard,71.2,Hard,79.1,0.3532561653102664
+hi,दो चरों वाले रैखिक प्रतिगमन मॉडल में बहुसंरेखता की समस्या का आकलन कीजिए।,Assess the problem of multicollinearity in a linear regression model with two variables.,Hard,hi,Identify the problem of multidivision in two variables Racky model.,Hard,79.3,Hard,79.7,0.1502000462870979
+hi,एंजाइम की गतिकी में माइकेलिस-मेंटेन समीकरण की व्युत्पत्ति कीजिए।,Derive the Michaelis-Menten equation in enzyme kinetics.,Hard,hi,Mueium's speed of Mikeis-in-a-law equation.,Hard,66.7,Hard,73.5,0.040161384364076534
+hi,संवैधानिक कानून में न्यायिक समीक्षा के सिद्धांत की आलोचनात्मक व्याख्या कीजिए।,Critically explain the doctrine of judicial review in constitutional law.,Hard,hi,Describe the critical principle of a judicial review in the constitution law.,Hard,68.3,Hard,74.2,0.15727800941615355
+hi,एक अवकल समीकरण dy/dx = xy को हल कीजिए जहाँ y(0) = 1 है।,Solve the differential equation dy/dx = xy where y(0) = 1.,Hard,hi,Angular equation is dy/dx = xy where y is = 1.,Medium,60.8,Medium,64.8,0.4394900482337441
+mr,पाण्याचे रासायनिक सूत्र काय आहे?,What is the chemical formula of water?,Easy,mr,What is the source of the water?,Easy,33.3,Easy,22.2,0.2705411345269699
+mr,भारताची राजधानी कोणती आहे?,What is the capital of India?,Easy,mr,What is India’s capital?,Easy,27.4,Easy,25.0,0.16515821590069038
+mr,एका आठवड्यात किती दिवस असतात?,How many days are there in a week?,Easy,mr,How many days are there in a week?,Easy,23.1,Easy,23.1,1.0
+mr,प्रकाशसंश्लेषणामध्ये क्लोरोफिलची भूमिका स्पष्ट करा.,Explain the role of chlorophyll in photosynthesis.,Medium,mr,Explain the role of chlorofyl in lighting.,Medium,40.1,Medium,37.6,0.38260294162784475
+mr,लोकशाही आणि राजेशाही यांमध्ये काय फरक आहे?,What is the difference between democracy and monarchy?,Medium,mr,What is the difference between the people and the kingdoms?,Easy,30.1,Medium,43.5,0.38163309113713373
+mr,पृथ्वीवर ऋतू का बदलतात?,Why do seasons change on Earth?,Medium,mr,Why the Change of Earth?,Easy,33.3,Easy,33.2,0.16341219448835542
+mr,सिद्ध करा की 2 चे वर्गमूळ ही अपरिमेय संख्या आहे.,Prove that the square root of 2 is an irrational number.,Hard,mr,Make sure that the square root of 2 is an infinite number.,Hard,74.4,Hard,72.9,0.6115380576901023
+mr,चलनविषयक धोरणाचा महागाई आणि बेरोजगारीवरील परिणामाचे मूल्यमापन करा.,Evaluate the effect of monetary policy on inflation and unemployment.,Hard,mr,Aim to place the suits in the order which fits the current layout most naturally.,Medium,44.1,Medium,51.4,0.029083177105737577
+mr,विकल समीकरण dy/dx = xy सोडवा जिथे y(0) = 1 आहे.,Solve the differential equation dy/dx = xy where y(0) = 1.,Hard,mr,"The square root of y/dx is equal to xy, where y(0) is equal to 1.",Hard,66.7,Medium,64.8,0.2179301929852717
+en,What is the chemical formula of water?,What is the chemical formula of water?,Easy,en,What is the chemical formula of water?,Easy,22.2,Easy,22.2,1.0
+en,Evaluate the effect of monetary policy on inflation and unemployment.,Evaluate the effect of monetary policy on inflation and unemployment.,Hard,en,Evaluate the effect of monetary policy on inflation and unemployment.,Medium,51.4,Medium,51.4,1.0

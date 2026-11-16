@@ -95,12 +95,22 @@ def load_trained(dev=None):
     return model.to(dev).eval(), tok
 
 
-def train(epochs=2, lr=4e-5, batch_size=16, reg_weight=2.0, max_len=96):
+def train(epochs=2, lr=4e-5, batch_size=16, reg_weight=2.0, max_len=96, resume=False, rehearsal=0):
     torch.manual_seed(SEED)
     dev = device()
     tr, va, te = (pd.read_parquet(DATA_PROC / f"{s}.parquet") for s in ("train", "val", "test"))
-    tok = AutoTokenizer.from_pretrained(BASE)
-    model = DifficultyTransformer().to(dev)
+    if rehearsal:  # continued fine-tuning: all new-source rows + a random sample of the original rows
+        new = tr[tr.source == "synthetic_arith"]
+        old = tr[tr.source != "synthetic_arith"].sample(min(rehearsal, (tr.source != "synthetic_arith").sum()), random_state=SEED)
+        tr = pd.concat([new, old]).sample(frac=1, random_state=SEED)
+        print(f"[bert] rehearsal set: {len(new)} new + {len(old)} original rows", flush=True)
+    if resume:  # continue fine-tuning the saved model (e.g. after adding new training data)
+        model, tok = load_trained(dev)
+        model.train()
+        print("[bert] resuming from", OUT, flush=True)
+    else:
+        tok = AutoTokenizer.from_pretrained(BASE)
+        model = DifficultyTransformer().to(dev)
     dl = DataLoader(QDataset(tr), batch_size=batch_size, shuffle=True, collate_fn=make_collate(tok, max_len))
     opt = torch.optim.AdamW(model.parameters(), lr=lr, weight_decay=0.01)
     total = epochs * len(dl)
@@ -119,7 +129,7 @@ def train(epochs=2, lr=4e-5, batch_size=16, reg_weight=2.0, max_len=96):
             torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
             opt.step(); sched.step(); opt.zero_grad()
             run += loss.item()
-            if step % 200 == 0:
+            if step % 100 == 0:
                 print(f"  ep{ep + 1} step {step}/{len(dl)} loss={run / (step + 1):.4f} "
                       f"{time.time() - t0:.0f}s", flush=True)
         p, sc = predict(model, tok, va.question.tolist(), dev=dev)
@@ -147,5 +157,8 @@ def train(epochs=2, lr=4e-5, batch_size=16, reg_weight=2.0, max_len=96):
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--epochs", type=int, default=2)
+    ap.add_argument("--lr", type=float, default=4e-5)
+    ap.add_argument("--resume", action="store_true")
+    ap.add_argument("--rehearsal", type=int, default=0)
     a = ap.parse_args()
-    train(epochs=a.epochs)
+    train(epochs=a.epochs, lr=a.lr, resume=a.resume, rehearsal=a.rehearsal)

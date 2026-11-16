@@ -1,8 +1,8 @@
 {
   "weights": {
     "gbm": 0.4,
-    "bert": 0.5,
-    "bilstm": 0.1
+    "bert": 0.6000000000000001,
+    "bilstm": 0.0
   },
   "alpha": 1.0
 }

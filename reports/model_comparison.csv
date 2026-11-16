@@ -1,7 +1,7 @@
 model,accuracy,macro_f1,qwk,mae,rmse,spearman,band_accuracy
-LightGBM (linguistic features only),0.7306,0.7334,0.7414,9.3678,12.412,0.8254,0.6694
-BiLSTM + attention (from scratch),0.7423,0.7448,0.7664,9.0854,12.0241,0.8369,0.7181
-TF-IDF + LogReg/Ridge (baseline),0.7617,0.7652,0.7888,9.0533,11.6104,0.8375,0.6596
-LightGBM (linguistic + stacked TF-IDF),0.7832,0.7858,0.81,7.3609,10.0847,0.8771,0.7473
-DistilBERT (multi-task),0.7985,0.7995,0.831,6.5744,9.4744,0.8931,0.7846
-Ensemble (final),0.8037,0.8048,0.8351,6.6624,9.5396,0.8919,0.8037
+LightGBM (linguistic features only),0.7282,0.731,0.7388,9.3564,12.4473,0.824,0.6722
+BiLSTM + attention (from scratch),0.7387,0.7414,0.7678,8.9093,11.7321,0.8326,0.6952
+TF-IDF + LogReg/Ridge (baseline),0.76,0.7636,0.7866,9.1881,11.8205,0.8332,0.6622
+LightGBM (linguistic + stacked TF-IDF),0.7813,0.7843,0.8116,7.3906,10.1488,0.8738,0.748
+DistilBERT (multi-task),0.7913,0.7922,0.8264,6.9396,9.9761,0.8842,0.7918
+Ensemble (final),0.8013,0.8021,0.8345,6.6129,9.6403,0.889,0.8013

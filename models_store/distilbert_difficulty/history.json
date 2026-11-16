@@ -1,24 +1,13 @@
 [
   {
     "epoch": 1,
-    "train_loss": 0.6472694627214116,
-    "accuracy": 0.7984,
-    "macro_f1": 0.8019,
-    "qwk": 0.8327,
-    "mae": 6.7197,
-    "rmse": 9.3545,
-    "spearman": 0.897,
-    "band_accuracy": 0.7783
-  },
-  {
-    "epoch": 2,
-    "train_loss": 0.47232336639275285,
-    "accuracy": 0.8075,
-    "macro_f1": 0.809,
-    "qwk": 0.8437,
-    "mae": 6.3034,
-    "rmse": 9.0949,
-    "spearman": 0.9019,
-    "band_accuracy": 0.7977
+    "train_loss": 0.3878318231337134,
+    "accuracy": 0.8179,
+    "macro_f1": 0.8152,
+    "qwk": 0.853,
+    "mae": 6.5843,
+    "rmse": 9.4132,
+    "spearman": 0.9061,
+    "band_accuracy": 0.8166
   }
 ]

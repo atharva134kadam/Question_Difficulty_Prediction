@@ -14,18 +14,18 @@
     "n": 24,
     "language_id_accuracy": 1.0,
     "corpus_bleu": 0.4856755788316754,
-    "score_mae_vs_english": 2.4291666666666667,
-    "level_agreement_with_english": 0.9166666666666666,
-    "accuracy_vs_expected_level": 0.8333333333333334,
-    "english_reference_accuracy": 0.8333333333333334
+    "score_mae_vs_english": 3.1,
+    "level_agreement_with_english": 0.875,
+    "accuracy_vs_expected_level": 0.7916666666666666,
+    "english_reference_accuracy": 0.75
   },
   "mr": {
     "n": 9,
     "language_id_accuracy": 1.0,
     "corpus_bleu": 0.3388431274393498,
-    "score_mae_vs_english": 5.7555555555555555,
-    "level_agreement_with_english": 0.6666666666666666,
-    "accuracy_vs_expected_level": 0.5555555555555556,
+    "score_mae_vs_english": 4.466666666666665,
+    "level_agreement_with_english": 0.7777777777777778,
+    "accuracy_vs_expected_level": 0.6666666666666666,
     "english_reference_accuracy": 0.6666666666666666
   }
 }

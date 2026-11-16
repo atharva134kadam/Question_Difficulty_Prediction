@@ -72,6 +72,26 @@ def fit():
     print("[ensemble] config", cfg)
     print("[ensemble] TEST", {k: v for k, v in m.items() if k != "confusion_matrix"})
 
+    # Comparable numbers: original test set (without the generated arithmetic questions)
+    # and the generated subset on its own, for every member + baseline + ensemble.
+    import joblib
+    from src.config import MODELS as _M
+    base = joblib.load(_M / "baseline_tfidf.joblib")
+    Xb = base["vectorizer"].transform(te.question.tolist())
+    members = {"TF-IDF + LogReg/Ridge (baseline)": (base["clf"].predict_proba(Xb), base["reg"].predict(Xb)),
+               "LightGBM (linguistic + stacked TF-IDF)": (pt["gbm"], st["gbm"]),
+               "DistilBERT (multi-task)": (pt["bert"], st["bert"]),
+               "BiLSTM + attention (from scratch)": (pt["bilstm"], st["bilstm"]),
+               "Ensemble (final)": (P, s)}
+    is_syn = (te.source == "synthetic_arith").values
+    for name, (pp, ss) in members.items():
+        for tag, mask in (("orig", ~is_syn), ("synthetic", is_syn)):
+            if mask.sum():
+                save_metrics(f"{tag}::{name}", full_report(te.label.values[mask], pp[mask].argmax(1) if name != "Ensemble (final)" else lvl[mask],
+                                                          te.score.values[mask], ss[mask]))
+    mo = full_report(te.label.values[~is_syn], lvl[~is_syn], te.score.values[~is_syn], s[~is_syn])
+    print("[ensemble] ORIGINAL TEST (no synthetic)", {k: v for k, v in mo.items() if k != "confusion_matrix"})
+
     # per-source analysis on the test set
     te = te.assign(pred_label=lvl, pred_score=s)
     per = te.groupby("group").apply(lambda d: pd.Series({

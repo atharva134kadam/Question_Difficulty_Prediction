@@ -16,7 +16,7 @@ Predicts the difficulty of any exam question as **Easy / Medium / Hard** plus a 
 It has an NLP lab (preprocessing, sentiment, information extraction, topics, Hindi/Marathi) and a GenAI studio
 backed by a local LLM (Qwen2.5-1.5B via Ollama, running inside this Space). No external APIs are called.
 
-Ensemble of DistilBERT, LightGBM and a BiLSTM: **80.4% accuracy, QWK 0.835, ±6.7-point score error** on 4,183 held-out questions.
+Ensemble of DistilBERT and LightGBM: **80.1% accuracy, QWK 0.835, ±6.6-point score error** on 4,183 held-out questions.
 
 Source code: https://github.com/atharva134kadam/Question_Difficulty_Prediction
 

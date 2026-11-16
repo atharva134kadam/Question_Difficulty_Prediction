@@ -69,8 +69,9 @@ def embedding_tsne(n=2500):
 
 def model_figures():
     mt = json.loads((REPORTS / "metrics.json").read_text())
+    pref = "orig::" if any(k.startswith("orig::") for k in mt) else "model::"   # original 4,183-question test set
     rows = [{"model": k.split("::", 1)[1], **{m: v for m, v in d.items() if m != "confusion_matrix"}}
-            for k, d in mt.items() if k.startswith("model::")]
+            for k, d in mt.items() if k.startswith(pref)]
     md = pd.DataFrame(rows).sort_values("macro_f1")
     md.to_csv(REPORTS / "model_comparison.csv", index=False)
     fig, ax = plt.subplots(1, 2, figsize=(13, 4))
@@ -83,8 +84,8 @@ def model_figures():
         ax[1].text(v + 0.1, i, f"{v:.2f}", va="center")
     ax[1].set_yticklabels([])
     _save("model_comparison.png")
-    if "model::Ensemble (final)" in mt:
-        cm = np.array(mt["model::Ensemble (final)"]["confusion_matrix"])
+    if pref + "Ensemble (final)" in mt:
+        cm = np.array(mt[pref + "Ensemble (final)"]["confusion_matrix"])
         plt.figure(figsize=(4.8, 4))
         sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=LEVELS, yticklabels=LEVELS)
         plt.xlabel("Predicted"); plt.ylabel("True"); plt.title("Final ensemble: confusion matrix")
@@ -92,6 +93,7 @@ def model_figures():
     tp = REPORTS / "test_predictions.csv"
     if tp.exists():
         d = pd.read_csv(tp)
+        d = d[d.source != "synthetic_arith"]
         plt.figure(figsize=(7, 4))
         for l in LEVELS:
             sns.kdeplot(d[d.level == l].pred_score, fill=True, color=PAL[l], label=f"true {l}", clip=(0, 100))

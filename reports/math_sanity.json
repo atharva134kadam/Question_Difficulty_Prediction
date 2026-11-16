@@ -1,0 +1,26 @@
+{
+  "before": {
+    "Easy": {
+      "n": 30,
+      "accuracy": 0.43333333333333335,
+      "mean_score": 42.85
+    },
+    "Hard": {
+      "n": 10,
+      "accuracy": 1.0,
+      "mean_score": 75.92999999999999
+    }
+  },
+  "after": {
+    "Easy": {
+      "n": 30,
+      "accuracy": 1.0,
+      "mean_score": 21.63333333333333
+    },
+    "Hard": {
+      "n": 10,
+      "accuracy": 1.0,
+      "mean_score": 77.27000000000001
+    }
+  }
+}

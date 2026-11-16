@@ -36,6 +36,8 @@ def score_to_level(score: float) -> str:
 # from the educational level of the source. The level is derived from the score.
 # ----------------------------------------------------------------------------
 ANCHORS = {
+    "arith_basic":     12,   # generated: single-step arithmetic, counting, comparisons (augmentation)
+    "prealgebra_basic": 24,  # generated: one-step equations, %, squares, simple fractions (augmentation)
     "sciq":            18,   # crowd-sourced, mostly recall science questions
     "commonsense_qa":  25,   # everyday commonsense
     "arc_easy":        28,   # grade 3-9 science, easy partition

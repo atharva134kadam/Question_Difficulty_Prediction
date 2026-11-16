@@ -1,27 +1,27 @@
 {
   "NLP ensemble (trained)": {
-    "accuracy": 0.7444,
-    "macro_f1": 0.742,
-    "qwk": 0.7869,
-    "mae": 8.3089,
-    "rmse": 11.8208,
-    "spearman": 0.8509,
-    "band_accuracy": 0.7444,
+    "accuracy": 0.7889,
+    "macro_f1": 0.7851,
+    "qwk": 0.8455,
+    "mae": 6.4467,
+    "rmse": 9.0473,
+    "spearman": 0.9314,
+    "band_accuracy": 0.7889,
     "confusion_matrix": [
       [
-        23,
-        7,
+        28,
+        2,
         0
       ],
       [
         6,
-        18,
-        6
+        19,
+        5
       ],
       [
-        1,
-        3,
-        26
+        0,
+        6,
+        24
       ]
     ]
   },

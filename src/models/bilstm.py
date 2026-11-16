@@ -141,5 +141,5 @@ def train(epochs=6, bs=64, lr=2e-3):
 
 
 if __name__ == "__main__":
-    torch.set_num_threads(2)
+    pass  # thread count is fixed via OMP_NUM_THREADS in src/__init__.py (OpenMP clash on macOS)
     train()

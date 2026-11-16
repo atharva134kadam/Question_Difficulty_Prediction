@@ -1,0 +1,41 @@
+question,expected_level
+1+2,Easy
+2*3,Easy
+9-4,Easy
+10/5,Easy
+What is 1+2?,Easy
+Compute 3^2.,Easy
+What is 6 times 7?,Easy
+How much is 15 + 27?,Easy
+Find 100 - 45.,Easy
+Evaluate 8 × 9,Easy
+What do you get when you add 13 and 8?,Easy
+Subtract 6 from 20.,Easy
+What is half of 50?,Easy
+Is 7 greater than 4?,Easy
+Write 3 + 3 + 3 as a multiplication.,Easy
+If x + 4 = 9 what is x?,Easy
+Solve 2x = 14.,Easy
+What is 25% of 200?,Easy
+What is the square root of 81?,Easy
+Round 47 to the nearest ten.,Easy
+What is 3/4 + 1/4?,Easy
+Which is the smallest: 12; 7; 19?,Easy
+Count by fives: 5; 10; 15; what comes next?,Easy
+What is 1000 + 1000?,Easy
+Calculate (2 + 3) * 4.,Easy
+What is 12 divided by 3?,Easy
+What is 5 squared?,Easy
+What is 0.5 + 0.25?,Easy
+How many sides does a triangle have?,Easy
+What is 11 + 11?,Easy
+Find all positive integers n such that n^2 + 1 is divisible by n + 1.,Hard
+Prove that there are infinitely many primes of the form 4k + 3.,Hard
+Let f(x) = x^3 - 3x + 1. Find the number of real roots of f(f(x)) = 0.,Hard
+Find the remainder when 2^100 is divided by 101.,Hard
+How many ordered pairs of positive integers (a; b) satisfy a^2 + b^2 = 2025?,Hard
+Evaluate the integral of x^2 e^x from 0 to 1.,Hard
+Find the minimum value of x^2 + y^2 subject to x + 2y = 5 and explain why it is a minimum.,Hard
+Determine all functions f from reals to reals such that f(x + y) = f(x) + f(y) and f is continuous.,Hard
+Compute the sum of all positive divisors of 2^10 * 3^5.,Hard
+Find the eigenvalues of the matrix [[2; 1]; [1; 2]] and the corresponding eigenvectors.,Hard

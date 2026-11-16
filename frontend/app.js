@@ -196,7 +196,7 @@ function renderResult(r) {
   $("#r-conf").textContent = `Confidence ${pct(r.confidence)}`;
   $("#r-probs").innerHTML = probBars(r.probabilities);
 
-  const names = { gbm: "LightGBM", bert: "DistilBERT", bilstm: "BiLSTM" };
+  const names = { gbm: "LightGBM", bert: "DistilBERT", bilstm: "BiLSTM (explainer)" };
   $("#r-members").innerHTML = Object.keys(r.member_scores).map((k) =>
     `<div class="row" style="justify-content:space-between;margin:7px 0"><span style="font-weight:600">${names[k] || k}</span><span class="row" style="gap:8px"><span class="muted small">${r.member_scores[k].toFixed(0)}/100</span>${badge(r.member_levels[k])}</span></div>`).join("");
 
@@ -482,7 +482,9 @@ async function initPrompts() {
 async function initReport() {
   const R = await getReports();
   const m = R.metrics || {};
-  const models = Object.entries(m).filter(([k]) => k.startsWith("model::")).map(([k, v]) => ({ model: k.split("::")[1], ...v })).sort((a, b) => a.macro_f1 - b.macro_f1);
+  // headline = original 4,183-question test set ("orig::"); falls back to "model::" if absent
+  const pref = Object.keys(m).some((k) => k.startsWith("orig::")) ? "orig::" : "model::";
+  const models = Object.entries(m).filter(([k]) => k.startsWith(pref)).map(([k, v]) => ({ model: k.split("::")[1], ...v })).sort((a, b) => a.macro_f1 - b.macro_f1);
   const fin = models.find((x) => x.model.startsWith("Ensemble")) || models[models.length - 1];
   $("#rep-stats").innerHTML = [["Accuracy", pct(fin.accuracy, 1)], ["Macro-F1", fin.macro_f1.toFixed(3)], ["Quadratic weighted kappa", fin.qwk.toFixed(3)], ["Score MAE (points)", "±" + fin.mae.toFixed(2)]]
     .map(([l, v]) => `<div class="card stat"><div class="l">Final ensemble · ${l}</div><div class="v">${v}</div></div>`).join("");

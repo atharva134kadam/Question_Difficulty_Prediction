@@ -104,7 +104,15 @@ def load_mmlu():
                          "question_raw": df.question, "options": df.choices.map(_choices)})
 
 
-LOADERS = [load_arc, load_sciq, load_obqa, load_csqa, load_race, load_gsm8k, load_math, load_mmlu]
+def load_synthetic_arith():
+    """Generated elementary arithmetic / pre-algebra (see src/data/synthetic_arith.py)."""
+    df = _read("synthetic_arith", "*")
+    return pd.DataFrame({"source": "synthetic_arith", "group": df.group, "subject": "mathematics_arithmetic",
+                         "question_raw": df.question, "options": [[] for _ in range(len(df))]})
+
+
+# NOTE: new loaders must be appended at the END so existing uids stay unchanged
+LOADERS = [load_arc, load_sciq, load_obqa, load_csqa, load_race, load_gsm8k, load_math, load_mmlu, load_synthetic_arith]
 
 
 def build_all() -> pd.DataFrame:
@@ -128,7 +136,25 @@ def build_all() -> pd.DataFrame:
 
 
 def make_splits(df: pd.DataFrame) -> pd.DataFrame:
-    """Cap each group, then stratified 80/10/10 split by group."""
+    """Cap each group, then stratified 80/10/10 split by group.
+
+    If split files already exist, every previously assigned question keeps its split
+    (no train/test leakage for models that are fine-tuned further); only groups that are
+    new get their own stratified 80/10/10 split.
+    """
+    if (DATA_PROC / "train.parquet").exists():
+        old = pd.concat([pd.read_parquet(DATA_PROC / f"{s}.parquet", columns=["uid"]).assign(split=s) for s in ("train", "val", "test")])
+        prev = df.merge(old, on="uid")
+        prev_groups = set(prev.group)
+        new = df[~df.group.isin(prev_groups)]
+        if len(new):
+            parts = [d.sample(min(len(d), GROUP_CAP), random_state=SEED) for _, d in new.groupby("group")]
+            m = pd.concat(parts)
+            tr, rest = train_test_split(m, test_size=0.2, stratify=m.group, random_state=SEED)
+            va, te = train_test_split(rest, test_size=0.5, stratify=rest.group, random_state=SEED)
+            prev = pd.concat([prev, tr.assign(split="train"), va.assign(split="val"), te.assign(split="test")])
+            print(f"[unify] kept {len(old)} existing assignments, added {len(m)} new rows from {sorted(set(m.group))}")
+        return prev
     parts = []
     for g, d in df.groupby("group"):
         parts.append(d.sample(min(len(d), GROUP_CAP), random_state=SEED))

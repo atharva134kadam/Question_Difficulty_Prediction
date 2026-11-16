@@ -40,7 +40,7 @@
     <section class="page" id="page-analyze">
       <div class="page-head">
         <div><h1>Analyze a question</h1>
-          <p>Type any exam question in English, Hindi or Marathi. An ensemble of DistilBERT, LightGBM and a BiLSTM predicts its difficulty level and a 0–100 score, and explains why.</p></div>
+          <p>Type any exam question in English, Hindi or Marathi. An ensemble of DistilBERT and LightGBM predicts its difficulty level and a 0–100 score; SHAP and a BiLSTM's attention explain why.</p></div>
       </div>
       <div class="card">
         <textarea id="q-input" placeholder="e.g. Prove that the square root of 2 is irrational."></textarea>
@@ -277,7 +277,7 @@
     <!-- ================= DATASETS ================= -->
     <section class="page" id="page-datasets">
       <div class="page-head">
-        <div><h1>Datasets</h1><p>9 public datasets downloaded once and stored in full under <code>data/raw/</code>. Click a dataset to browse every row.</p></div>
+        <div><h1>Datasets</h1><p>9 public datasets downloaded once and stored in full under <code>data/raw/</code>, plus a generated elementary-arithmetic set. Click a dataset to browse every row.</p></div>
       </div>
       <div class="grid g4" id="ds-stats"></div>
       <div class="dataset-cards mt" id="ds-cards"></div>
