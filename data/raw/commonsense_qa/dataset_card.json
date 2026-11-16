@@ -1,0 +1,13 @@
+{
+  "name": "commonsense_qa",
+  "source": "https://huggingface.co/datasets/tau/commonsense_qa",
+  "description": "Commonsense reasoning questions built on ConceptNet",
+  "license": "MIT",
+  "difficulty_signal": "Easy anchor",
+  "files": {
+    "train": 9741,
+    "validation": 1221,
+    "test": 1140
+  },
+  "total_rows": 12102
+}

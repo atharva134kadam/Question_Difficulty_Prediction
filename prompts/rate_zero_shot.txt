@@ -1,0 +1,10 @@
+Rate the difficulty of the following exam question.
+
+Use exactly one of these levels:
+- Easy (score 0-33): recall of a basic fact, one simple step, school level
+- Medium (score 34-66): understanding or applying a concept, a few steps, high-school level
+- Hard (score 67-100): multi-step reasoning, advanced or specialised knowledge, college / competition level
+
+Question: """{question}"""
+
+Respond ONLY with JSON: {{"level": "Easy|Medium|Hard", "score": <integer 0-100>}}

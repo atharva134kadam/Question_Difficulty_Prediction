@@ -1,0 +1,31 @@
+{
+  "language_id_accuracy": 1.0,
+  "mt_model_selection": {
+    "hi | opus-mt-hi-en": 0.4856755788316754,
+    "hi | opus-mt-mul-en": 0.27984307777753026,
+    "mr | opus-mt-mr-en": 0.08303758204291802,
+    "mr | opus-mt-mul-en": 0.3388431274393498
+  },
+  "selected_models": {
+    "hi": "Helsinki-NLP/opus-mt-hi-en",
+    "mr": "Helsinki-NLP/opus-mt-mul-en"
+  },
+  "hi": {
+    "n": 24,
+    "language_id_accuracy": 1.0,
+    "corpus_bleu": 0.4856755788316754,
+    "score_mae_vs_english": 2.4291666666666667,
+    "level_agreement_with_english": 0.9166666666666666,
+    "accuracy_vs_expected_level": 0.8333333333333334,
+    "english_reference_accuracy": 0.8333333333333334
+  },
+  "mr": {
+    "n": 9,
+    "language_id_accuracy": 1.0,
+    "corpus_bleu": 0.3388431274393498,
+    "score_mae_vs_english": 5.7555555555555555,
+    "level_agreement_with_english": 0.6666666666666666,
+    "accuracy_vs_expected_level": 0.5555555555555556,
+    "english_reference_accuracy": 0.6666666666666666
+  }
+}

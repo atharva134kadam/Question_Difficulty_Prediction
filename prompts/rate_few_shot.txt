@@ -1,0 +1,9 @@
+Rate the difficulty of exam questions. Levels: Easy (0-33), Medium (34-66), Hard (67-100).
+
+Examples:
+{examples}
+
+Now rate this question.
+Question: """{question}"""
+
+Respond ONLY with JSON: {{"level": "Easy|Medium|Hard", "score": <integer 0-100>}}

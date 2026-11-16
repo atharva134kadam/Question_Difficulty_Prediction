@@ -1,0 +1,16 @@
+{
+  "name": "race",
+  "source": "https://huggingface.co/datasets/ehovy/race",
+  "description": "English reading comprehension exams for Chinese students (age 12-18)",
+  "license": "Non-commercial research",
+  "difficulty_signal": "Middle school vs High school",
+  "files": {
+    "middle_test": 1436,
+    "middle_train": 25421,
+    "middle_validation": 1436,
+    "high_test": 3498,
+    "high_train": 62445,
+    "high_validation": 3451
+  },
+  "total_rows": 97687
+}

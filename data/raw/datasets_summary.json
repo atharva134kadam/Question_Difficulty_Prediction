@@ -1,0 +1,135 @@
+{
+  "arc": {
+    "name": "arc",
+    "source": "https://huggingface.co/datasets/allenai/ai2_arc",
+    "description": "AI2 Reasoning Challenge: grade 3-9 science exam questions",
+    "license": "CC BY-SA 4.0",
+    "difficulty_signal": "Easy set vs Challenge set",
+    "files": {
+      "ARC-Easy_train": 2251,
+      "ARC-Easy_test": 2376,
+      "ARC-Easy_validation": 570,
+      "ARC-Challenge_train": 1119,
+      "ARC-Challenge_test": 1172,
+      "ARC-Challenge_validation": 299
+    },
+    "total_rows": 7787
+  },
+  "sciq": {
+    "name": "sciq",
+    "source": "https://huggingface.co/datasets/allenai/sciq",
+    "description": "Crowd-sourced science exam questions (physics, chemistry, biology)",
+    "license": "CC BY-NC 3.0",
+    "difficulty_signal": "Easy anchor",
+    "files": {
+      "train": 11679,
+      "validation": 1000,
+      "test": 1000
+    },
+    "total_rows": 13679
+  },
+  "openbookqa": {
+    "name": "openbookqa",
+    "source": "https://huggingface.co/datasets/allenai/openbookqa",
+    "description": "Elementary science questions needing multi-step reasoning",
+    "license": "Apache 2.0",
+    "difficulty_signal": "Medium anchor",
+    "files": {
+      "main_train": 4957,
+      "main_validation": 500,
+      "main_test": 500
+    },
+    "total_rows": 5957
+  },
+  "commonsense_qa": {
+    "name": "commonsense_qa",
+    "source": "https://huggingface.co/datasets/tau/commonsense_qa",
+    "description": "Commonsense reasoning questions built on ConceptNet",
+    "license": "MIT",
+    "difficulty_signal": "Easy anchor",
+    "files": {
+      "train": 9741,
+      "validation": 1221,
+      "test": 1140
+    },
+    "total_rows": 12102
+  },
+  "race": {
+    "name": "race",
+    "source": "https://huggingface.co/datasets/ehovy/race",
+    "description": "English reading comprehension exams for Chinese students (age 12-18)",
+    "license": "Non-commercial research",
+    "difficulty_signal": "Middle school vs High school",
+    "files": {
+      "middle_test": 1436,
+      "middle_train": 25421,
+      "middle_validation": 1436,
+      "high_test": 3498,
+      "high_train": 62445,
+      "high_validation": 3451
+    },
+    "total_rows": 97687
+  },
+  "gsm8k": {
+    "name": "gsm8k",
+    "source": "https://huggingface.co/datasets/openai/gsm8k",
+    "description": "Grade-school maths word problems",
+    "license": "MIT",
+    "difficulty_signal": "Easy maths anchor",
+    "files": {
+      "main_train": 7473,
+      "main_test": 1319
+    },
+    "total_rows": 8792
+  },
+  "math": {
+    "name": "math",
+    "source": "https://huggingface.co/datasets/EleutherAI/hendrycks_math",
+    "description": "Competition mathematics problems (AMC, AIME, ...)",
+    "license": "MIT",
+    "difficulty_signal": "Level 1-5",
+    "files": {
+      "algebra_train": 1744,
+      "algebra_test": 1187,
+      "counting_and_probability_train": 771,
+      "counting_and_probability_test": 474,
+      "geometry_train": 870,
+      "geometry_test": 479,
+      "intermediate_algebra_train": 1295,
+      "intermediate_algebra_test": 903,
+      "number_theory_train": 869,
+      "number_theory_test": 540,
+      "prealgebra_train": 1205,
+      "prealgebra_test": 871,
+      "precalculus_train": 746,
+      "precalculus_test": 546
+    },
+    "total_rows": 12500
+  },
+  "mmlu": {
+    "name": "mmlu",
+    "source": "https://huggingface.co/datasets/cais/mmlu",
+    "description": "57 academic subjects from elementary to professional level",
+    "license": "MIT",
+    "difficulty_signal": "elementary / high_school / college+professional subject level",
+    "files": {
+      "all_test": 14042,
+      "all_validation": 1531,
+      "all_dev": 285
+    },
+    "total_rows": 15858
+  },
+  "sst2": {
+    "name": "sst2",
+    "source": "https://huggingface.co/datasets/stanfordnlp/sst2",
+    "description": "Stanford Sentiment Treebank (binary) - used for CO2 sentiment model",
+    "license": "Unknown/research",
+    "difficulty_signal": "N/A (sentiment labels)",
+    "files": {
+      "train": 67349,
+      "validation": 872,
+      "test": 1821
+    },
+    "total_rows": 70042
+  }
+}

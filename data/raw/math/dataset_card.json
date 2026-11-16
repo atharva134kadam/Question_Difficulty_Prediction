@@ -1,0 +1,24 @@
+{
+  "name": "math",
+  "source": "https://huggingface.co/datasets/EleutherAI/hendrycks_math",
+  "description": "Competition mathematics problems (AMC, AIME, ...)",
+  "license": "MIT",
+  "difficulty_signal": "Level 1-5",
+  "files": {
+    "algebra_train": 1744,
+    "algebra_test": 1187,
+    "counting_and_probability_train": 771,
+    "counting_and_probability_test": 474,
+    "geometry_train": 870,
+    "geometry_test": 479,
+    "intermediate_algebra_train": 1295,
+    "intermediate_algebra_test": 903,
+    "number_theory_train": 869,
+    "number_theory_test": 540,
+    "prealgebra_train": 1205,
+    "prealgebra_test": 871,
+    "precalculus_train": 746,
+    "precalculus_test": 546
+  },
+  "total_rows": 12500
+}

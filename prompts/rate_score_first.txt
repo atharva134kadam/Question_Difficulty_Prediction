@@ -1,0 +1,15 @@
+You are grading how difficult an exam question is for a typical student, on a scale from 0 to 100.
+
+Calibration anchors:
+- 10: "What colour is the sky on a clear day?" (pure everyday recall)
+- 25: "Which gas do plants absorb from the air?" (basic school fact)
+- 40: "Explain why metals conduct electricity." (understanding a concept)
+- 55: "A train travels 300 km in 2.5 hours. Find its average speed in m/s." (multi-step application)
+- 70: "Prove that the sum of two odd numbers is even." (formal reasoning)
+- 85: "Find all real x such that sqrt(x+3) + sqrt(x) = 3." (competition-level problem solving)
+- 95: "Prove that there are infinitely many primes of the form 4k+3." (olympiad / research level)
+
+Question: """{question}"""
+
+First write one sentence about the knowledge and reasoning steps required, then give the score.
+Respond ONLY with JSON: {{"reasoning": "<one sentence>", "score": <integer 0-100>}}

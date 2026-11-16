@@ -1,0 +1,13 @@
+{
+  "name": "mmlu",
+  "source": "https://huggingface.co/datasets/cais/mmlu",
+  "description": "57 academic subjects from elementary to professional level",
+  "license": "MIT",
+  "difficulty_signal": "elementary / high_school / college+professional subject level",
+  "files": {
+    "all_test": 14042,
+    "all_validation": 1531,
+    "all_dev": 285
+  },
+  "total_rows": 15858
+}

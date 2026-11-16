@@ -1,0 +1,298 @@
+{
+  "vec::BoW (counts)": {
+    "accuracy": 0.699,
+    "macro_f1": 0.7045,
+    "qwk": 0.7013,
+    "mae": 12.5277,
+    "rmse": 16.3425,
+    "spearman": 0.7088,
+    "band_accuracy": 0.5769,
+    "confusion_matrix": [
+      [
+        1137,
+        363,
+        42
+      ],
+      [
+        387,
+        909,
+        183
+      ],
+      [
+        67,
+        217,
+        878
+      ]
+    ],
+    "dims": 12008,
+    "seconds": 3.0
+  },
+  "vec::TF-IDF word 1-2gram": {
+    "accuracy": 0.7287,
+    "macro_f1": 0.7324,
+    "qwk": 0.7425,
+    "mae": 9.8163,
+    "rmse": 12.6587,
+    "spearman": 0.806,
+    "band_accuracy": 0.6352,
+    "confusion_matrix": [
+      [
+        1204,
+        308,
+        30
+      ],
+      [
+        389,
+        890,
+        200
+      ],
+      [
+        60,
+        148,
+        954
+      ]
+    ],
+    "dims": 40000,
+    "seconds": 4.4
+  },
+  "vec::TF-IDF word+char": {
+    "accuracy": 0.7617,
+    "macro_f1": 0.7652,
+    "qwk": 0.7888,
+    "mae": 9.0533,
+    "rmse": 11.6104,
+    "spearman": 0.8375,
+    "band_accuracy": 0.6596,
+    "confusion_matrix": [
+      [
+        1246,
+        283,
+        13
+      ],
+      [
+        320,
+        969,
+        190
+      ],
+      [
+        35,
+        156,
+        971
+      ]
+    ],
+    "dims": 100000,
+    "seconds": 25.7
+  },
+  "vec::Word2Vec (mean)": {
+    "accuracy": 0.6718,
+    "macro_f1": 0.6722,
+    "qwk": 0.6855,
+    "mae": 11.9306,
+    "rmse": 14.788,
+    "spearman": 0.7559,
+    "band_accuracy": 0.5386,
+    "confusion_matrix": [
+      [
+        1152,
+        341,
+        49
+      ],
+      [
+        460,
+        729,
+        290
+      ],
+      [
+        79,
+        154,
+        929
+      ]
+    ],
+    "dims": 100,
+    "seconds": 1.5
+  },
+  "vec::Linguistic features": {
+    "accuracy": 0.6799,
+    "macro_f1": 0.683,
+    "qwk": 0.6733,
+    "mae": 12.7811,
+    "rmse": 15.7425,
+    "spearman": 0.7365,
+    "band_accuracy": 0.5159,
+    "confusion_matrix": [
+      [
+        1147,
+        351,
+        44
+      ],
+      [
+        405,
+        844,
+        230
+      ],
+      [
+        96,
+        213,
+        853
+      ]
+    ],
+    "dims": 57,
+    "seconds": 2.2
+  },
+  "model::LightGBM (linguistic features only)": {
+    "accuracy": 0.7306,
+    "macro_f1": 0.7334,
+    "qwk": 0.7414,
+    "mae": 9.3678,
+    "rmse": 12.412,
+    "spearman": 0.8254,
+    "band_accuracy": 0.6694,
+    "confusion_matrix": [
+      [
+        1205,
+        304,
+        33
+      ],
+      [
+        344,
+        915,
+        220
+      ],
+      [
+        59,
+        167,
+        936
+      ]
+    ]
+  },
+  "model::TF-IDF + LogReg/Ridge (baseline)": {
+    "accuracy": 0.7617,
+    "macro_f1": 0.7652,
+    "qwk": 0.7888,
+    "mae": 9.0533,
+    "rmse": 11.6104,
+    "spearman": 0.8375,
+    "band_accuracy": 0.6596,
+    "confusion_matrix": [
+      [
+        1246,
+        283,
+        13
+      ],
+      [
+        320,
+        969,
+        190
+      ],
+      [
+        35,
+        156,
+        971
+      ]
+    ]
+  },
+  "model::LightGBM (linguistic + stacked TF-IDF)": {
+    "accuracy": 0.7832,
+    "macro_f1": 0.7858,
+    "qwk": 0.81,
+    "mae": 7.3609,
+    "rmse": 10.0847,
+    "spearman": 0.8771,
+    "band_accuracy": 0.7473,
+    "confusion_matrix": [
+      [
+        1269,
+        261,
+        12
+      ],
+      [
+        281,
+        999,
+        199
+      ],
+      [
+        30,
+        124,
+        1008
+      ]
+    ]
+  },
+  "model::BiLSTM + attention (from scratch)": {
+    "accuracy": 0.7423,
+    "macro_f1": 0.7448,
+    "qwk": 0.7664,
+    "mae": 9.0854,
+    "rmse": 12.0241,
+    "spearman": 0.8369,
+    "band_accuracy": 0.7181,
+    "confusion_matrix": [
+      [
+        1264,
+        264,
+        14
+      ],
+      [
+        370,
+        924,
+        185
+      ],
+      [
+        47,
+        198,
+        917
+      ]
+    ]
+  },
+  "model::DistilBERT (multi-task)": {
+    "accuracy": 0.7985,
+    "macro_f1": 0.7995,
+    "qwk": 0.831,
+    "mae": 6.5744,
+    "rmse": 9.4744,
+    "spearman": 0.8931,
+    "band_accuracy": 0.7846,
+    "confusion_matrix": [
+      [
+        1325,
+        208,
+        9
+      ],
+      [
+        283,
+        996,
+        200
+      ],
+      [
+        19,
+        124,
+        1019
+      ]
+    ]
+  },
+  "model::Ensemble (final)": {
+    "accuracy": 0.8037,
+    "macro_f1": 0.8048,
+    "qwk": 0.8351,
+    "mae": 6.6624,
+    "rmse": 9.5396,
+    "spearman": 0.8919,
+    "band_accuracy": 0.8037,
+    "confusion_matrix": [
+      [
+        1328,
+        206,
+        8
+      ],
+      [
+        273,
+        1007,
+        199
+      ],
+      [
+        20,
+        115,
+        1027
+      ]
+    ]
+  }
+}

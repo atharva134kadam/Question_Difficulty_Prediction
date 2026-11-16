@@ -1,0 +1,12 @@
+{
+  "name": "gsm8k",
+  "source": "https://huggingface.co/datasets/openai/gsm8k",
+  "description": "Grade-school maths word problems",
+  "license": "MIT",
+  "difficulty_signal": "Easy maths anchor",
+  "files": {
+    "main_train": 7473,
+    "main_test": 1319
+  },
+  "total_rows": 8792
+}

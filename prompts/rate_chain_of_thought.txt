@@ -1,0 +1,13 @@
+Rate the difficulty of the following exam question. Think step by step before deciding.
+
+Levels: Easy (0-33) = basic recall, one step, school level. Medium (34-66) = apply/understand a concept, a few steps, high-school level. Hard (67-100) = multi-step reasoning or advanced/specialised knowledge, college or competition level.
+
+Question: """{question}"""
+
+Reason briefly about:
+1. What knowledge is required and at what education level?
+2. How many reasoning or calculation steps are needed?
+3. Which Bloom's taxonomy level does it target?
+Then decide.
+
+Respond ONLY with JSON: {{"reasoning": "<2-3 sentences>", "level": "Easy|Medium|Hard", "score": <integer 0-100>}}

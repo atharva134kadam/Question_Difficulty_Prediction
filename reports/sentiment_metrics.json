@@ -1,0 +1,41 @@
+{
+  "VADER (rule-based)": {
+    "accuracy": 0.625,
+    "macro_f1": 0.6007275690707532
+  },
+  "TF-IDF + Naive Bayes": {
+    "accuracy": 0.8222477064220184,
+    "macro_f1": 0.8209931726827846
+  },
+  "TF-IDF + Logistic Regression": {
+    "accuracy": 0.819954128440367,
+    "macro_f1": 0.8192349995180621
+  },
+  "classification_report_lr": {
+    "negative": {
+      "precision": 0.8483290488431876,
+      "recall": 0.7710280373831776,
+      "f1-score": 0.8078335373317014,
+      "support": 428.0
+    },
+    "positive": {
+      "precision": 0.7971014492753623,
+      "recall": 0.8671171171171171,
+      "f1-score": 0.8306364617044228,
+      "support": 444.0
+    },
+    "accuracy": 0.819954128440367,
+    "macro avg": {
+      "precision": 0.822715249059275,
+      "recall": 0.8190725772501474,
+      "f1-score": 0.8192349995180621,
+      "support": 872.0
+    },
+    "weighted avg": {
+      "precision": 0.8222452710815886,
+      "recall": 0.819954128440367,
+      "f1-score": 0.8194442006590963,
+      "support": 872.0
+    }
+  }
+}

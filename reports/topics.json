@@ -1,0 +1,416 @@
+{
+  "lda_coherence_by_k": {
+    "8": 0.4782604997519514,
+    "10": 0.5099782077067405,
+    "12": 0.4765763165029366,
+    "15": 0.47211882282095796,
+    "20": 0.4527381554432994
+  },
+  "best_k": 10,
+  "lda_coherence": 0.5099782077067405,
+  "nmf_coherence": 0.5603047483168883,
+  "lda_topics": [
+    {
+      "topic": 0,
+      "top_words": [
+        "follow",
+        "state",
+        "question",
+        "information",
+        "refer",
+        "accord",
+        "may",
+        "law",
+        "know",
+        "cause"
+      ],
+      "n_questions": 2375,
+      "mean_score": 45.4,
+      "pct_hard": 0.16,
+      "main_sources": {
+        "mmlu": 911,
+        "race": 563,
+        "arc": 344
+      }
+    },
+    {
+      "topic": 1,
+      "top_words": [
+        "digit",
+        "foot",
+        "year",
+        "many",
+        "rock",
+        "base",
+        "bill",
+        "age",
+        "table",
+        "face"
+      ],
+      "n_questions": 1010,
+      "mean_score": 49.2,
+      "pct_hard": 0.277,
+      "main_sources": {
+        "math": 334,
+        "arc": 143,
+        "gsm8k": 129
+      }
+    },
+    {
+      "topic": 2,
+      "top_words": [
+        "car",
+        "man",
+        "defendant",
+        "year",
+        "light",
+        "old",
+        "woman",
+        "tell",
+        "drive",
+        "trial"
+      ],
+      "n_questions": 1532,
+      "mean_score": 45.6,
+      "pct_hard": 0.272,
+      "main_sources": {
+        "race": 482,
+        "mmlu": 469,
+        "commonsense_qa": 200
+      }
+    },
+    {
+      "topic": 3,
+      "top_words": [
+        "student",
+        "many",
+        "people",
+        "school",
+        "first",
+        "class",
+        "child",
+        "study",
+        "book",
+        "group"
+      ],
+      "n_questions": 1953,
+      "mean_score": 42.8,
+      "pct_hard": 0.177,
+      "main_sources": {
+        "race": 642,
+        "math": 358,
+        "gsm8k": 258
+      }
+    },
+    {
+      "topic": 4,
+      "top_words": [
+        "hour",
+        "day",
+        "take",
+        "work",
+        "minute",
+        "per",
+        "long",
+        "time",
+        "food",
+        "run"
+      ],
+      "n_questions": 1498,
+      "mean_score": 38.4,
+      "pct_hard": 0.093,
+      "main_sources": {
+        "race": 269,
+        "gsm8k": 221,
+        "commonsense_qa": 212
+      }
+    },
+    {
+      "topic": 5,
+      "top_words": [
+        "integer",
+        "point",
+        "sqrt",
+        "positive",
+        "triangle",
+        "diagram",
+        "square",
+        "angle",
+        "area",
+        "form"
+      ],
+      "n_questions": 3507,
+      "mean_score": 72.5,
+      "pct_hard": 0.675,
+      "main_sources": {
+        "math": 3001,
+        "mmlu": 170,
+        "arc": 88
+      }
+    },
+    {
+      "topic": 6,
+      "top_words": [
+        "water",
+        "plant",
+        "energy",
+        "follow",
+        "type",
+        "change",
+        "cell",
+        "produce",
+        "describe",
+        "process"
+      ],
+      "n_questions": 4032,
+      "mean_score": 38.0,
+      "pct_hard": 0.059,
+      "main_sources": {
+        "arc": 1478,
+        "sciq": 744,
+        "openbookqa": 559
+      }
+    },
+    {
+      "topic": 7,
+      "top_words": [
+        "year",
+        "company",
+        "land",
+        "pay",
+        "build",
+        "property",
+        "city",
+        "owner",
+        "house",
+        "contract"
+      ],
+      "n_questions": 1014,
+      "mean_score": 54.0,
+      "pct_hard": 0.385,
+      "main_sources": {
+        "mmlu": 417,
+        "race": 189,
+        "math": 137
+      }
+    },
+    {
+      "topic": 8,
+      "top_words": [
+        "real",
+        "circ",
+        "function",
+        "enter",
+        "compute",
+        "equation",
+        "sin",
+        "root",
+        "smallest",
+        "possible"
+      ],
+      "n_questions": 1477,
+      "mean_score": 69.5,
+      "pct_hard": 0.622,
+      "main_sources": {
+        "math": 1177,
+        "mmlu": 90,
+        "race": 65
+      }
+    },
+    {
+      "topic": 9,
+      "top_words": [
+        "many",
+        "much",
+        "buy",
+        "cost",
+        "total",
+        "sell",
+        "ball",
+        "money",
+        "spend",
+        "piece"
+      ],
+      "n_questions": 1602,
+      "mean_score": 38.5,
+      "pct_hard": 0.099,
+      "main_sources": {
+        "gsm8k": 619,
+        "math": 222,
+        "race": 170
+      }
+    }
+  ],
+  "nmf_topics": [
+    {
+      "topic": 0,
+      "top_words": [
+        "integer",
+        "positive",
+        "smallest",
+        "many",
+        "possible",
+        "divisor",
+        "factor",
+        "sum",
+        "less",
+        "multiple"
+      ],
+      "n_questions": 912,
+      "mean_score": 70.8
+    },
+    {
+      "topic": 1,
+      "top_words": [
+        "sqrt",
+        "simplify",
+        "evaluate",
+        "form",
+        "denominator",
+        "rationalize",
+        "simplest",
+        "expression",
+        "write",
+        "fraction"
+      ],
+      "n_questions": 423,
+      "mean_score": 74.9
+    },
+    {
+      "topic": 2,
+      "top_words": [
+        "triangle",
+        "angle",
+        "diagram",
+        "area",
+        "abc",
+        "point",
+        "square",
+        "side",
+        "length",
+        "circ"
+      ],
+      "n_questions": 1542,
+      "mean_score": 69.4
+    },
+    {
+      "topic": 3,
+      "top_words": [
+        "compute",
+        "circ",
+        "tan",
+        "sin",
+        "give",
+        "root",
+        "infinity",
+        "complex",
+        "radian",
+        "head"
+      ],
+      "n_questions": 312,
+      "mean_score": 71.6
+    },
+    {
+      "topic": 4,
+      "top_words": [
+        "many",
+        "student",
+        "water",
+        "people",
+        "day",
+        "year",
+        "take",
+        "time",
+        "plant",
+        "want"
+      ],
+      "n_questions": 12195,
+      "mean_score": 39.6
+    },
+    {
+      "topic": 5,
+      "top_words": [
+        "real",
+        "minimum",
+        "function",
+        "possible",
+        "satisfy",
+        "root",
+        "positive",
+        "polynomial",
+        "maximum",
+        "complex"
+      ],
+      "n_questions": 752,
+      "mean_score": 74.2
+    },
+    {
+      "topic": 6,
+      "top_words": [
+        "equation",
+        "solution",
+        "solve",
+        "root",
+        "point",
+        "line",
+        "enter",
+        "circle",
+        "sum",
+        "separate"
+      ],
+      "n_questions": 692,
+      "mean_score": 68.8
+    },
+    {
+      "topic": 7,
+      "top_words": [
+        "follow",
+        "expression",
+        "except",
+        "describe",
+        "accord",
+        "example",
+        "simplify",
+        "common",
+        "factor",
+        "correct"
+      ],
+      "n_questions": 2058,
+      "mean_score": 52.3
+    },
+    {
+      "topic": 8,
+      "top_words": [
+        "digit",
+        "sum",
+        "base",
+        "three",
+        "common",
+        "divisible",
+        "fraction",
+        "multiple",
+        "unit",
+        "product"
+      ],
+      "n_questions": 879,
+      "mean_score": 68.8
+    },
+    {
+      "topic": 9,
+      "top_words": [
+        "divide",
+        "remainder",
+        "sum",
+        "quotient",
+        "term",
+        "sequence",
+        "determine",
+        "polynomial",
+        "prime",
+        "less"
+      ],
+      "n_questions": 235,
+      "mean_score": 64.8
+    }
+  ]
+}

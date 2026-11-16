@@ -1,0 +1,5 @@
+Write {n} new exam questions about the topic "{topic}" at {level} difficulty.
+
+{level} means: {definition}
+
+Output ONLY a JSON object: {{"questions": ["question 1", "question 2", ...]}}

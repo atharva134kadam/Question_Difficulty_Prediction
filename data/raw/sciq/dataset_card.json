@@ -1,0 +1,13 @@
+{
+  "name": "sciq",
+  "source": "https://huggingface.co/datasets/allenai/sciq",
+  "description": "Crowd-sourced science exam questions (physics, chemistry, biology)",
+  "license": "CC BY-NC 3.0",
+  "difficulty_signal": "Easy anchor",
+  "files": {
+    "train": 11679,
+    "validation": 1000,
+    "test": 1000
+  },
+  "total_rows": 13679
+}

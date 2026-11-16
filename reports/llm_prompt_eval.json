@@ -1,0 +1,170 @@
+{
+  "NLP ensemble (trained)": {
+    "accuracy": 0.7444,
+    "macro_f1": 0.742,
+    "qwk": 0.7869,
+    "mae": 8.3089,
+    "rmse": 11.8208,
+    "spearman": 0.8509,
+    "band_accuracy": 0.7444,
+    "confusion_matrix": [
+      [
+        23,
+        7,
+        0
+      ],
+      [
+        6,
+        18,
+        6
+      ],
+      [
+        1,
+        3,
+        26
+      ]
+    ]
+  },
+  "LLM score_first": {
+    "accuracy": 0.4111,
+    "macro_f1": 0.3851,
+    "qwk": 0.2273,
+    "mae": 21.9222,
+    "rmse": 26.6093,
+    "spearman": 0.158,
+    "band_accuracy": 0.4111,
+    "confusion_matrix": [
+      [
+        6,
+        22,
+        2
+      ],
+      [
+        3,
+        22,
+        5
+      ],
+      [
+        3,
+        18,
+        9
+      ]
+    ],
+    "seconds_per_question": 2.44,
+    "predicted_level_distribution": {
+      "Medium": 62,
+      "Hard": 16,
+      "Easy": 12
+    },
+    "accuracy_level_from_score": 0.4111
+  },
+  "LLM zero_shot": {
+    "accuracy": 0.3333,
+    "macro_f1": 0.1667,
+    "qwk": 0.0,
+    "mae": 21.2444,
+    "rmse": 26.1933,
+    "spearman": 0.3063,
+    "band_accuracy": 0.4222,
+    "confusion_matrix": [
+      [
+        30,
+        0,
+        0
+      ],
+      [
+        30,
+        0,
+        0
+      ],
+      [
+        30,
+        0,
+        0
+      ]
+    ],
+    "seconds_per_question": 1.18,
+    "predicted_level_distribution": {
+      "Easy": 90
+    },
+    "accuracy_level_from_score": 0.4222
+  },
+  "LLM few_shot": {
+    "accuracy": 0.3889,
+    "macro_f1": 0.4073,
+    "qwk": 0.3214,
+    "mae": 25.3778,
+    "rmse": 29.9941,
+    "spearman": 0.0605,
+    "band_accuracy": 0.3444,
+    "confusion_matrix": [
+      [
+        13,
+        15,
+        2
+      ],
+      [
+        20,
+        10,
+        0
+      ],
+      [
+        5,
+        13,
+        12
+      ]
+    ],
+    "seconds_per_question": 1.36,
+    "predicted_level_distribution": {
+      "Easy": 38,
+      "Medium": 38,
+      "Hard": 14
+    },
+    "accuracy_level_from_score": 0.3444
+  },
+  "LLM chain_of_thought": {
+    "accuracy": 0.3333,
+    "macro_f1": 0.1667,
+    "qwk": 0.0,
+    "mae": 24.3667,
+    "rmse": 31.2401,
+    "spearman": 0.1234,
+    "band_accuracy": 0.3333,
+    "confusion_matrix": [
+      [
+        30,
+        0,
+        0
+      ],
+      [
+        30,
+        0,
+        0
+      ],
+      [
+        30,
+        0,
+        0
+      ]
+    ],
+    "seconds_per_question": 5.11,
+    "predicted_level_distribution": {
+      "Easy": 90
+    },
+    "accuracy_level_from_score": 0.3333
+  },
+  "rewrite": {
+    "n": 24,
+    "success_rate": 0.8333333333333334,
+    "by_direction": {
+      "easier": {
+        "success": 0.833,
+        "mean_change": -4.567
+      },
+      "harder": {
+        "success": 0.833,
+        "mean_change": 10.983
+      }
+    }
+  }
+}

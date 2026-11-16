@@ -1,0 +1,8 @@
+A trained NLP model rated this exam question as {level} (difficulty score {score}/100).
+
+Question: """{question}"""
+
+Signals measured by the model:
+{signals}
+
+In 3-4 short bullet points, explain to a teacher WHY this question has this difficulty. Mention concrete aspects of the question (concepts, steps, wording). Do not repeat the numbers mechanically and do not answer the question.

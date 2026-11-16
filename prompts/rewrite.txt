@@ -1,0 +1,9 @@
+Rewrite the exam question below so that it becomes {direction}.
+
+Original question ({level}, score {score}/100):
+"""{question}"""
+
+Guidelines for making it {direction}:
+{guidelines}
+
+Keep the same subject and topic. Output ONLY the rewritten question text, nothing else.

@@ -1,0 +1,36 @@
+lang,question,english_reference,expected_level
+hi,पानी का रासायनिक सूत्र क्या है?,What is the chemical formula of water?,Easy
+hi,भारत की राजधानी क्या है?,What is the capital of India?,Easy
+hi,सूर्य किस दिशा में उगता है?,In which direction does the sun rise?,Easy
+hi,एक सप्ताह में कितने दिन होते हैं?,How many days are there in a week?,Easy
+hi,पौधे अपना भोजन किस प्रक्रिया से बनाते हैं?,By which process do plants make their food?,Easy
+hi,गाय कौन सा जानवर है?,What kind of animal is a cow?,Easy
+hi,राम के पास 5 सेब हैं और उसने 2 खा लिए। अब उसके पास कितने सेब बचे हैं?,Ram has 5 apples and he ate 2. How many apples does he have left now?,Easy
+hi,हमारे सौर मंडल में कितने ग्रह हैं?,How many planets are there in our solar system?,Easy
+hi,प्रकाश संश्लेषण में क्लोरोफिल की भूमिका समझाइए।,Explain the role of chlorophyll in photosynthesis.,Medium
+hi,एक कार 2 घंटे में 120 किलोमीटर चलती है। उसकी औसत गति क्या है?,A car travels 120 kilometres in 2 hours. What is its average speed?,Medium
+hi,लोकतंत्र और राजतंत्र में क्या अंतर है?,What is the difference between democracy and monarchy?,Medium
+hi,अम्ल और क्षार के बीच अंतर स्पष्ट कीजिए।,Explain the difference between an acid and a base.,Medium
+hi,न्यूटन के गति के तीसरे नियम को एक उदाहरण सहित समझाइए।,Explain Newton's third law of motion with an example.,Medium
+hi,समीकरण 3x + 7 = 22 को हल कीजिए।,Solve the equation 3x + 7 = 22.,Medium
+hi,पृथ्वी पर ऋतुएँ क्यों बदलती हैं?,Why do seasons change on Earth?,Medium
+hi,फ्रांसीसी क्रांति के मुख्य कारणों का वर्णन कीजिए।,Describe the main causes of the French Revolution.,Medium
+hi,सिद्ध कीजिए कि 2 का वर्गमूल एक अपरिमेय संख्या है।,Prove that the square root of 2 is an irrational number.,Hard
+hi,मौद्रिक नीति का मुद्रास्फीति और बेरोजगारी पर प्रभाव का मूल्यांकन कीजिए।,Evaluate the effect of monetary policy on inflation and unemployment.,Hard
+hi,क्वांटम उलझाव की अवधारणा का विश्लेषण कीजिए और इसके प्रायोगिक प्रमाणों की चर्चा कीजिए।,Analyze the concept of quantum entanglement and discuss its experimental evidence.,Hard
+hi,"ऐसे सभी धनात्मक पूर्णांक n ज्ञात कीजिए जिनके लिए n^2 + 1, n + 1 से विभाज्य है।","Find all positive integers n for which n^2 + 1 is divisible by n + 1.",Hard
+hi,दो चरों वाले रैखिक प्रतिगमन मॉडल में बहुसंरेखता की समस्या का आकलन कीजिए।,Assess the problem of multicollinearity in a linear regression model with two variables.,Hard
+hi,एंजाइम की गतिकी में माइकेलिस-मेंटेन समीकरण की व्युत्पत्ति कीजिए।,Derive the Michaelis-Menten equation in enzyme kinetics.,Hard
+hi,संवैधानिक कानून में न्यायिक समीक्षा के सिद्धांत की आलोचनात्मक व्याख्या कीजिए।,Critically explain the doctrine of judicial review in constitutional law.,Hard
+hi,एक अवकल समीकरण dy/dx = xy को हल कीजिए जहाँ y(0) = 1 है।,Solve the differential equation dy/dx = xy where y(0) = 1.,Hard
+mr,पाण्याचे रासायनिक सूत्र काय आहे?,What is the chemical formula of water?,Easy
+mr,भारताची राजधानी कोणती आहे?,What is the capital of India?,Easy
+mr,एका आठवड्यात किती दिवस असतात?,How many days are there in a week?,Easy
+mr,प्रकाशसंश्लेषणामध्ये क्लोरोफिलची भूमिका स्पष्ट करा.,Explain the role of chlorophyll in photosynthesis.,Medium
+mr,लोकशाही आणि राजेशाही यांमध्ये काय फरक आहे?,What is the difference between democracy and monarchy?,Medium
+mr,पृथ्वीवर ऋतू का बदलतात?,Why do seasons change on Earth?,Medium
+mr,सिद्ध करा की 2 चे वर्गमूळ ही अपरिमेय संख्या आहे.,Prove that the square root of 2 is an irrational number.,Hard
+mr,चलनविषयक धोरणाचा महागाई आणि बेरोजगारीवरील परिणामाचे मूल्यमापन करा.,Evaluate the effect of monetary policy on inflation and unemployment.,Hard
+mr,विकल समीकरण dy/dx = xy सोडवा जिथे y(0) = 1 आहे.,Solve the differential equation dy/dx = xy where y(0) = 1.,Hard
+en,What is the chemical formula of water?,What is the chemical formula of water?,Easy
+en,Evaluate the effect of monetary policy on inflation and unemployment.,Evaluate the effect of monetary policy on inflation and unemployment.,Hard

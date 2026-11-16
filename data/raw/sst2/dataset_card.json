@@ -1,0 +1,13 @@
+{
+  "name": "sst2",
+  "source": "https://huggingface.co/datasets/stanfordnlp/sst2",
+  "description": "Stanford Sentiment Treebank (binary) - used for CO2 sentiment model",
+  "license": "Unknown/research",
+  "difficulty_signal": "N/A (sentiment labels)",
+  "files": {
+    "train": 67349,
+    "validation": 872,
+    "test": 1821
+  },
+  "total_rows": 70042
+}

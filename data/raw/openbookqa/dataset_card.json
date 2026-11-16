@@ -1,0 +1,13 @@
+{
+  "name": "openbookqa",
+  "source": "https://huggingface.co/datasets/allenai/openbookqa",
+  "description": "Elementary science questions needing multi-step reasoning",
+  "license": "Apache 2.0",
+  "difficulty_signal": "Medium anchor",
+  "files": {
+    "main_train": 4957,
+    "main_validation": 500,
+    "main_test": 500
+  },
+  "total_rows": 5957
+}

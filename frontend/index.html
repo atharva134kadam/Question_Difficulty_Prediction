@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DiffiQ · Question Difficulty Predictor</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%236366f1'/><text x='50' y='68' font-size='56' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>Q</text></svg>">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+  <!-- ================= SIDEBAR ================= -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-logo">Q</div>
+      <div><div class="brand-name">DiffiQ</div><div class="brand-sub">Question Difficulty AI</div></div>
+    </div>
+    <nav class="nav">
+      <a href="#analyze" data-page="analyze"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>Analyze question</a>
+      <a href="#paper" data-page="paper"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>Paper analyzer</a>
+      <div class="nav-label">NLP Lab</div>
+      <a href="#lab" data-page="lab" data-sub="co1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h10M4 17h7"/></svg>Text pipeline<span class="tag">CO1</span></a>
+      <a href="#lab" data-page="lab" data-sub="co2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M8 13s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>Sentiment &amp; IE<span class="tag">CO2</span></a>
+      <a href="#lab" data-page="lab" data-sub="topics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Topics<span class="tag">CO3</span></a>
+      <a href="#lab" data-page="lab" data-sub="multi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>Multilingual<span class="tag">CO3</span></a>
+      <a href="#genai" data-page="genai"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l1.9 4.6L18.5 9l-4.6 1.9L12 15.5l-1.9-4.6L5.5 9l4.6-1.4z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg>GenAI studio<span class="tag">CO4</span></a>
+      <div class="nav-label">Project</div>
+      <a href="#report" data-page="report"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Model report</a>
+      <a href="#datasets" data-page="datasets"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg>Datasets</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div><span class="status-dot wait" id="dot-models"></span><span id="st-models">Models: loading…</span></div>
+      <div><span class="status-dot wait" id="dot-llm"></span><span id="st-llm">Local LLM: checking…</span></div>
+      <div style="color:#646b8a">100% local · no external APIs</div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <!-- ================= ANALYZE ================= -->
+    <section class="page" id="page-analyze">
+      <div class="page-head">
+        <div><h1>Analyze a question</h1>
+          <p>Type any exam question in English, Hindi or Marathi. An ensemble of DistilBERT, LightGBM and a BiLSTM predicts its difficulty level and a 0–100 score, and explains why.</p></div>
+      </div>
+      <div class="card">
+        <textarea id="q-input" placeholder="e.g. Prove that the square root of 2 is irrational."></textarea>
+        <div class="row" style="margin-top:12px;justify-content:space-between">
+          <div class="examples" id="examples" style="margin:0"></div>
+          <div class="row"><button class="btn btn-ghost" id="q-clear">Clear</button>
+            <button class="btn btn-primary" id="q-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Predict difficulty</button></div>
+        </div>
+      </div>
+
+      <div id="result" class="mt hidden">
+        <div id="r-translated" class="translated hidden"></div>
+        <div class="result-hero">
+          <div class="card gauge-wrap">
+            <div id="r-gauge"></div>
+            <div class="gauge-score" id="r-score">0<small>/100</small></div>
+            <div style="margin-top:10px" id="r-badge"></div>
+            <div class="muted small" style="margin-top:8px" id="r-conf"></div>
+          </div>
+          <div class="card">
+            <h3>Level probabilities</h3><div class="sub">Ensemble output (softmax, weighted)</div>
+            <div id="r-probs"></div>
+            <h3 style="margin-top:18px">Model agreement</h3><div class="sub">Each model's individual verdict</div>
+            <div id="r-members"></div>
+          </div>
+          <div class="card">
+            <h3>Question profile</h3><div class="sub">Linguistic &amp; cognitive signals</div>
+            <dl class="kv" id="r-profile"></dl>
+          </div>
+        </div>
+
+        <div class="grid g2 mt">
+          <div class="card">
+            <h3>Why this score? SHAP</h3><div class="sub">Top feature contributions in the LightGBM model (red = harder, green = easier)</div>
+            <div id="r-shap"></div>
+          </div>
+          <div class="card">
+            <h3>Neural attention</h3><div class="sub">Words the BiLSTM focused on (darker = more attention)</div>
+            <div class="attn" id="r-attn"></div>
+            <h3 style="margin-top:20px">Extracted information</h3><div class="sub">Entities · keyphrases · quantities (CO2)</div>
+            <div id="r-ie"></div>
+          </div>
+        </div>
+        <div class="card mt">
+          <div class="row" style="justify-content:space-between">
+            <div><h3>AI explanation</h3><div class="sub" style="margin:0">A local LLM explains the prediction, grounded in the measured signals (CO4)</div></div>
+            <button class="btn btn-ai" id="r-explain"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l1.9 4.6L18.5 9l-4.6 1.9L12 15.5l-1.9-4.6L5.5 9l4.6-1.4z"/></svg>Explain with local AI</button>
+          </div>
+          <div id="r-ai" class="ai-box mt hidden"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PAPER ================= -->
+    <section class="page" id="page-paper">
+      <div class="page-head">
+        <div><h1>Question paper analyzer</h1>
+          <p>Upload a whole question paper. Questions are extracted from the unstructured document, cleaned, scored, and the paper's difficulty balance is analysed.</p></div>
+        <span class="chip-co">CO1 · text extraction</span>
+      </div>
+      <div class="grid g2">
+        <label class="drop" id="drop">
+          <input type="file" id="paper-file" accept=".pdf,.docx,.txt,.csv,.md" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg>
+          <div style="font-weight:650;margin-top:8px" id="drop-text">Drop a PDF, DOCX, TXT or CSV here, or click to browse</div>
+          <div class="muted small">Numbering (Q1., 1), (a)…), marks, headers and MCQ options are handled automatically</div>
+        </label>
+        <div class="card" style="display:flex;flex-direction:column;justify-content:center;gap:12px">
+          <h3>No paper handy?</h3>
+          <div class="muted small">Use the bundled sample paper: 10 questions across science, maths, social studies, plus one in Hindi.</div>
+          <div class="row"><button class="btn btn-primary" id="paper-sample">Analyze sample paper</button>
+            <a class="btn btn-ghost" href="/api/sample-paper">Download sample .docx</a></div>
+        </div>
+      </div>
+      <div id="paper-out" class="mt hidden">
+        <div class="grid g4" id="paper-stats"></div>
+        <div class="grid g2 mt">
+          <div class="card"><h3>Difficulty mix</h3><div class="sub" id="paper-balance"></div><div style="height:240px"><canvas id="ch-paper-pie"></canvas></div></div>
+          <div class="card"><h3>Score per question</h3><div class="sub">Bands: Easy &lt; 33 · Medium 33–67 · Hard ≥ 67</div><div style="height:240px"><canvas id="ch-paper-bar"></canvas></div></div>
+        </div>
+        <div class="card mt">
+          <div class="row" style="justify-content:space-between;margin-bottom:12px"><h3>Questions</h3><button class="btn btn-ghost" id="paper-csv">Download CSV</button></div>
+          <div class="table-wrap"><table class="tbl" id="paper-table"></table></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= NLP LAB ================= -->
+    <section class="page" id="page-lab">
+      <div class="page-head">
+        <div><h1>NLP Lab</h1><p>Every NLP stage of the project, live and evaluated, mapped to the course outcomes.</p></div>
+      </div>
+      <div class="tabs" id="lab-tabs">
+        <button data-sub="co1">CO1 · Pipeline &amp; vectorisation</button>
+        <button data-sub="co2">CO2 · Sentiment &amp; IE</button>
+        <button data-sub="topics">CO3 · Topic modelling</button>
+        <button data-sub="multi">CO3 · Multilingual</button>
+      </div>
+
+      <!-- CO1 -->
+      <div class="subpage" id="sub-co1">
+        <div class="card">
+          <h3>Preprocessing pipeline</h3><div class="sub">Type noisy text: HTML, LaTeX, marks and numbering are all handled</div>
+          <div class="row"><input type="text" id="pp-input" style="flex:1" value="Q3. Find the value of $\frac{x^2}{4}$ when x = 6 <b>[2 marks]</b> and the students were running experiments"><button class="btn btn-primary" id="pp-go">Run pipeline</button></div>
+          <div class="steps mt" id="pp-steps"></div>
+        </div>
+        <div class="grid g2 mt">
+          <div class="card"><h3>Vectoriser comparison</h3><div class="sub">Same classifier, held-out test set (4,183 questions)</div><div style="height:280px"><canvas id="ch-vec"></canvas></div></div>
+          <div class="card"><h3>Results table</h3><div class="sub">Accuracy, macro-F1, QWK, score MAE, dimensions</div><div class="table-wrap"><table class="tbl" id="vec-table"></table></div></div>
+        </div>
+        <div class="figs mt"><figure class="card"><img class="fig" src="/figures/embedding_tsne.png" alt=""><figcaption>t-SNE of Word2Vec question embeddings</figcaption></figure>
+          <figure class="card"><img class="fig" src="/figures/readability_by_level.png" alt=""><figcaption>readability &amp; syntax by difficulty level</figcaption></figure></div>
+      </div>
+
+      <!-- CO2 -->
+      <div class="subpage" id="sub-co2">
+        <div class="grid g2">
+          <div class="card"><h3>Sentiment models</h3><div class="sub">Evaluated on SST-2 validation (872 sentences)</div><div style="height:220px"><canvas id="ch-sent"></canvas></div></div>
+          <div class="card"><h3>Live sentiment</h3><div class="sub">VADER (lexicon) + trained TF-IDF Logistic Regression</div>
+            <div class="row"><input type="text" id="se-input" style="flex:1" value="Unfortunately, which of the following is NOT a cause of the terrible famine?"><button class="btn btn-primary" id="se-go">Analyse</button></div>
+            <div id="se-out" class="mt"></div></div>
+        </div>
+        <div class="card mt">
+          <h3>Information extraction</h3><div class="sub">NER · YAKE / RAKE / TextRank keyphrases · SVO triples · quantities · Bloom's taxonomy</div>
+          <div class="row"><input type="text" id="ie-input" style="flex:1" value="Calculate the force needed to accelerate a 1200 kg car from rest to 25 m/s in 8 seconds on the Mumbai-Pune expressway."><button class="btn btn-primary" id="ie-go">Extract</button></div>
+          <div id="ie-out" class="mt"></div>
+        </div>
+        <div class="grid g3 mt" id="ie-metrics"></div>
+        <div class="card mt"><h3>Does question tone relate to difficulty?</h3><div class="sub">Sentiment applied to the test questions</div><div class="table-wrap"><table class="tbl" id="sent-diff"></table></div></div>
+      </div>
+
+      <!-- CO3 topics -->
+      <div class="subpage" id="sub-topics">
+        <div class="grid g3" id="topic-stats"></div>
+        <div class="grid g2 mt">
+          <div class="card"><h3>Choosing the number of topics</h3><div class="sub">LDA C_v coherence vs k</div><div style="height:260px"><canvas id="ch-coh"></canvas></div></div>
+          <div class="card"><h3>Find the topic of a question</h3><div class="sub">LDA topic inference</div>
+            <div class="row"><input type="text" id="tp-input" style="flex:1" value="What is the probability of rolling two sixes with two dice?"><button class="btn btn-primary" id="tp-go">Infer</button></div>
+            <div id="tp-out" class="mt"></div></div>
+        </div>
+        <div class="card mt"><h3>Average difficulty per LDA topic</h3><div class="sub">Topics sorted by mean difficulty score</div><div style="height:380px"><canvas id="ch-topics"></canvas></div></div>
+        <div class="card mt"><h3>NMF topics</h3><div class="sub">Matrix-factorisation alternative on TF-IDF</div><div class="table-wrap"><table class="tbl" id="nmf-table"></table></div></div>
+      </div>
+
+      <!-- CO3 multilingual -->
+      <div class="subpage" id="sub-multi">
+        <div class="card">
+          <h3>Multilingual difficulty prediction</h3>
+          <div class="sub">Language ID (Unicode script + n-gram model + function words) → Indic normalisation &amp; tokenisation → local neural MT (OPUS-MT) → difficulty model</div>
+          <div class="row"><input type="text" id="ml-input" style="flex:1" value="न्यूटन के गति के तीसरे नियम को एक उदाहरण सहित समझाइए।"><button class="btn btn-primary" id="ml-go">Analyse</button></div>
+          <div class="examples" id="ml-examples"></div>
+          <div id="ml-out" class="mt"></div>
+        </div>
+        <div class="grid g2 mt">
+          <div class="card"><h3>Evaluation on the hand-written parallel set</h3><div class="sub">35 questions with English references</div><div class="table-wrap"><table class="tbl" id="ml-metrics"></table></div></div>
+          <div class="card"><h3>Translation model selection</h3><div class="sub">Corpus BLEU against human references, used to pick the MT model per language</div><div style="height:240px"><canvas id="ch-mt"></canvas></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= GENAI ================= -->
+    <section class="page" id="page-genai">
+      <div class="page-head">
+        <div><h1>GenAI studio</h1><p>A local LLM (Qwen2.5-1.5B via Ollama, running on this machine) works together with the trained NLP model: the LLM generates, the NLP model verifies.</p></div>
+        <span class="chip-co">CO4 · prompt engineering</span>
+      </div>
+      <div class="tabs" id="gen-tabs">
+        <button data-sub="rewrite" class="active">Rewrite easier / harder</button>
+        <button data-sub="generate">Generate questions</button>
+        <button data-sub="judge">LLM-as-judge</button>
+        <button data-sub="prompts">Prompt engineering results</button>
+      </div>
+      <div class="subpage active" id="gen-rewrite">
+        <div class="card">
+          <label class="lbl">Question</label><input type="text" id="rw-input" value="Explain the role of chlorophyll in photosynthesis.">
+          <div class="row mt"><select id="rw-dir" style="width:auto"><option value="harder">Make it harder</option><option value="easier">Make it easier</option></select>
+            <button class="btn btn-ai" id="rw-go">Rewrite &amp; verify</button></div>
+          <div id="rw-out" class="mt"></div>
+        </div>
+      </div>
+      <div class="subpage" id="gen-generate">
+        <div class="card">
+          <div class="grid g3"><div><label class="lbl">Topic</label><input type="text" id="gn-topic" value="Newton's laws of motion"></div>
+            <div><label class="lbl">Target level</label><select id="gn-level"><option>Easy</option><option selected>Medium</option><option>Hard</option></select></div>
+            <div><label class="lbl">How many</label><input type="number" id="gn-n" min="1" max="5" value="3"></div></div>
+          <div class="row mt"><button class="btn btn-ai" id="gn-go">Generate &amp; verify</button></div>
+          <div id="gn-out" class="mt"></div>
+        </div>
+      </div>
+      <div class="subpage" id="gen-judge">
+        <div class="card">
+          <label class="lbl">Question</label><input type="text" id="jd-input" value="Prove that the square root of 2 is irrational.">
+          <div class="row mt"><select id="jd-strat" style="width:auto"><option value="score_first">v2 score-first (best)</option><option value="few_shot">few-shot</option><option value="zero_shot">zero-shot</option><option value="chain_of_thought">chain-of-thought</option></select>
+            <button class="btn btn-ai" id="jd-go">Ask the LLM</button></div>
+          <div id="jd-out" class="mt"></div>
+        </div>
+      </div>
+      <div class="subpage" id="gen-prompts">
+        <div class="grid g2">
+          <div class="card"><h3>LLM judge vs trained model</h3><div class="sub">Same 90 balanced test questions (30 per level)</div><div style="height:280px"><canvas id="ch-llm"></canvas></div></div>
+          <div class="card"><h3>Findings</h3>
+            <ol style="padding-left:18px;margin:6px 0;display:grid;gap:8px;font-size:13.5px">
+              <li><b>Label anchoring:</b> with v1 zero-shot and chain-of-thought prompts, the 1.5B model answered <i>"Easy"</i> for all 90 questions. It copies the first option of the <code>"Easy|Medium|Hard"</code> template.</li>
+              <li><b>Few-shot examples</b> break the anchoring: the model uses all three levels and gets the best F1 and QWK among the LLM strategies.</li>
+              <li><b>v2 score-first prompt</b> (our fix): no level words, calibrated anchor questions, level derived from the score in code. This gives the best LLM accuracy.</li>
+              <li>The trained NLP ensemble still far outperforms every prompt, so the LLM <i>generates and explains</i>, and the NLP model <i>scores and verifies</i>.</li>
+            </ol>
+            <div class="grid g2 mt" id="rw-stats"></div>
+          </div>
+        </div>
+        <div class="card mt"><h3>Prompt templates</h3><div class="sub">All prompts are versioned files in <code>prompts/</code></div><div class="grid g2" id="prompt-list"></div></div>
+      </div>
+    </section>
+
+    <!-- ================= REPORT ================= -->
+    <section class="page" id="page-report">
+      <div class="page-head">
+        <div><h1>Model report</h1><p>All models evaluated on the same held-out test set of 4,183 questions. Level: accuracy, macro-F1, quadratic weighted kappa. Score: MAE in points, Spearman correlation.</p></div>
+      </div>
+      <div class="grid g4" id="rep-stats"></div>
+      <div class="card mt"><h3>Model comparison</h3><div class="sub">Final ensemble weights tuned on the validation set</div><div class="table-wrap"><table class="tbl" id="rep-table"></table></div></div>
+      <div class="grid g2 mt">
+        <div class="card"><h3>Macro-F1 by model</h3><div style="height:280px"><canvas id="ch-models"></canvas></div></div>
+        <div class="card"><h3>Calibration per source</h3><div class="sub">Anchor score vs mean predicted score (diagonal = perfect)</div><div style="height:280px"><canvas id="ch-calib"></canvas></div></div>
+      </div>
+      <div class="grid g2 mt">
+        <div class="card"><h3>Confusion matrix · final ensemble</h3><div id="rep-cm" class="mt"></div></div>
+        <div class="card"><h3>Per-source accuracy</h3><div class="table-wrap" style="max-height:330px"><table class="tbl" id="rep-src"></table></div></div>
+      </div>
+      <h3 class="mt" style="margin-bottom:12px">Figures</h3>
+      <div class="figs" id="rep-figs"></div>
+    </section>
+
+    <!-- ================= DATASETS ================= -->
+    <section class="page" id="page-datasets">
+      <div class="page-head">
+        <div><h1>Datasets</h1><p>9 public datasets downloaded once and stored in full under <code>data/raw/</code>. Click a dataset to browse every row.</p></div>
+      </div>
+      <div class="grid g4" id="ds-stats"></div>
+      <div class="dataset-cards mt" id="ds-cards"></div>
+      <div class="card mt" id="ds-browser">
+        <div class="row" style="justify-content:space-between"><h3 id="ds-title">Browse</h3>
+          <div class="row"><select id="ds-file" style="width:auto"></select><input type="text" id="ds-search" placeholder="Search…" style="width:220px"></div></div>
+        <div class="table-wrap mt"><table class="tbl" id="ds-table"></table></div>
+        <div class="pager"><button class="btn btn-ghost" id="ds-prev">← Prev</button><span id="ds-page"></span><button class="btn btn-ghost" id="ds-next">Next →</button></div>
+      </div>
+      <div class="card mt"><h3>Unified modelling set</h3><div class="sub">Questions per source group and level (capped at 3,000 per group)</div><div style="height:320px"><canvas id="ch-groups"></canvas></div></div>
+      <div class="card mt"><h3>Hand-labelled gold sets</h3><div class="sub">Used for evaluating Bloom's extraction and the multilingual pipeline</div>
+        <div class="row" id="gold-btns"></div><div class="table-wrap mt"><table class="tbl" id="gold-table"></table></div></div>
+    </section>
+  </main>
+</div>
+<div class="toast" id="toast"></div>
+<script src="vendor/chart.umd.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

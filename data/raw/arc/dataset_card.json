@@ -1,0 +1,16 @@
+{
+  "name": "arc",
+  "source": "https://huggingface.co/datasets/allenai/ai2_arc",
+  "description": "AI2 Reasoning Challenge: grade 3-9 science exam questions",
+  "license": "CC BY-SA 4.0",
+  "difficulty_signal": "Easy set vs Challenge set",
+  "files": {
+    "ARC-Easy_train": 2251,
+    "ARC-Easy_test": 2376,
+    "ARC-Easy_validation": 570,
+    "ARC-Challenge_train": 1119,
+    "ARC-Challenge_test": 1172,
+    "ARC-Challenge_validation": 299
+  },
+  "total_rows": 7787
+}

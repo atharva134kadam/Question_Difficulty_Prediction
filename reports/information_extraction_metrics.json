@@ -1,0 +1,371 @@
+{
+  "blooms_explicit_verbs": {
+    "accuracy": 1.0,
+    "exact_or_adjacent": 1.0,
+    "per_level": {
+      "Remember": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 10.0
+      },
+      "Understand": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 10.0
+      },
+      "Apply": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 10.0
+      },
+      "Analyze": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 10.0
+      },
+      "Evaluate": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 10.0
+      },
+      "Create": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 10.0
+      }
+    },
+    "macro_f1": 1.0,
+    "confusion_matrix": [
+      [
+        10,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        10,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        10,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        10,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        10,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        10
+      ]
+    ],
+    "errors": []
+  },
+  "blooms_real_exam_questions": {
+    "accuracy": 0.4166666666666667,
+    "exact_or_adjacent": 0.8166666666666667,
+    "per_level": {
+      "Remember": {
+        "precision": 0.2972972972972973,
+        "recall": 0.9166666666666666,
+        "f1-score": 0.4489795918367347,
+        "support": 12.0
+      },
+      "Understand": {
+        "precision": 0.4,
+        "recall": 0.1111111111111111,
+        "f1-score": 0.17391304347826086,
+        "support": 18.0
+      },
+      "Apply": {
+        "precision": 0.6470588235294118,
+        "recall": 0.5789473684210527,
+        "f1-score": 0.6111111111111112,
+        "support": 19.0
+      },
+      "Analyze": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 9.0
+      },
+      "Evaluate": {
+        "precision": 1.0,
+        "recall": 0.5,
+        "f1-score": 0.6666666666666666,
+        "support": 2.0
+      },
+      "Create": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      }
+    },
+    "macro_f1": 0.3167784021821289,
+    "confusion_matrix": [
+      [
+        11,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        16,
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        7,
+        1,
+        11,
+        0,
+        0,
+        0
+      ],
+      [
+        2,
+        1,
+        6,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "errors": [
+      {
+        "question": "A person may celebrate an equinox",
+        "bloom_level": "Understand",
+        "pred": "Remember"
+      },
+      {
+        "question": "According to the correspondence principle,",
+        "bloom_level": "Remember",
+        "pred": "Understand"
+      },
+      {
+        "question": "A 10 kg box slides horizontally without friction at a speed of 1 m/s. At one point, a constant force is applied to the box in the direction of its motion. The box travels 5 m with the constant force applied. The force is then removed, leaving the box with a speed of 2 m/s. Which of the following gives the magnitude of the applied force?",
+        "bloom_level": "Apply",
+        "pred": "Remember"
+      },
+      {
+        "question": "What happens when the kidneys cannot remove wastes from the blood?",
+        "bloom_level": "Understand",
+        "pred": "Remember"
+      },
+      {
+        "question": "When can lunar and solar eclipses take place?",
+        "bloom_level": "Understand",
+        "pred": "Remember"
+      },
+      {
+        "question": "The structures found in a living cell can be compared to the parts of a factory that produces cars. Which part of the factory is most similar to the nucleus of a living cell?",
+        "bloom_level": "Analyze",
+        "pred": "Remember"
+      },
+      {
+        "question": "A volcano under the ocean slowly releases lava over time. As the lava is released, it cools and hardens on the ocean floor. Which feature will most likely form from the release and cooling of the lava on the ocean floor over time?",
+        "bloom_level": "Apply",
+        "pred": "Understand"
+      },
+      {
+        "question": "If the lengths of two sides of a right triangle are 5 and 12 units, what is the least possible length, in units, of the third side? Express your answer in simplest radical form.",
+        "bloom_level": "Apply",
+        "pred": "Remember"
+      },
+      {
+        "question": "Which activity is an example of a chemical change?",
+        "bloom_level": "Understand",
+        "pred": "Remember"
+      },
+      {
+        "question": "Two cats in different rooms may share information by",
+        "bloom_level": "Understand",
+        "pred": "Remember"
+      },
+      {
+        "question": "Bin A has one white ball and four black balls. Bin B has three balls labeled \\ 1 and one ball labeled \\ 7 . Bin W has five balls labeled \\ 8 and one ball labeled \\ 500 . A game is played as follows: a ball is randomly selected from bin A . If it is black, then a ball is randomly selected from bin B ; otherwise, if the original ball is white, then a ball is randomly selected from bin W . You win the amount printed on the second ball selected. What is your expected win?",
+        "bloom_level": "Analyze",
+        "pred": "Remember"
+      },
+      {
+        "question": "Hoping for a beautiful day, what did the clouds do that disappointed everyone?",
+        "bloom_level": "Understand",
+        "pred": "Remember"
+      },
+      {
+        "question": "The matrix 3 & -1 \\\\ c & d is its own inverse. Enter the ordered pair (c,d).",
+        "bloom_level": "Apply",
+        "pred": "Remember"
+      },
+      {
+        "question": "Define A = (1)/(1^2) + (1)/(5^2) - (1)/(7^2) - (1)/(11^2) + (1)/(13^2) + (1)/(17^2) - , which omits all terms of the form (1)/(n^2) where n is an odd multiple of 3, and B = (1)/(3^2) - (1)/(9^2) + (1)/(15^2) - (1)/(21^2) + (1)/(27^2) - (1)/(33^2) + , which includes only terms of the form (1)/(n^2) where n is an odd multiple of 3. Determine (A)/(B) .",
+        "bloom_level": "Analyze",
+        "pred": "Apply"
+      },
+      {
+        "question": "Triangle ABC with right angle at C , angle BAC < 45^ circ and AB = 4 . Point P on AB is chosen such that angle APC = 2 angle ACP and CP = 1 . The ratio (AP)/(BP) can be represented in the form p + q sqrt r , where p , q , r are positive integers and r is not divisible by the square of any prime. Find p+q+r .",
+        "bloom_level": "Analyze",
+        "pred": "Apply"
+      },
+      {
+        "question": "Plankton are tiny ocean organisms. The role of one type of plankton is to use the energy from the Sun to produce food that other animals eat. Which organism has the same role in the ocean as this type of plankton?",
+        "bloom_level": "Analyze",
+        "pred": "Apply"
+      },
+      {
+        "question": "Where might a student store a pencil when traveling",
+        "bloom_level": "Understand",
+        "pred": "Remember"
+      },
+      {
+        "question": "Swift Co. has identified three operating segments that may require separate disclosure in Swift's general purpose financial statements for the year ended December 31 year 2. Information for year 2 follows: Segment (in thousands) A B C Total Reported revenue 42 121 14 177 Reported profit(loss) 12 65 (3) 74 Assets 470 800 80 1350 Which of Swift's segments are required to be separately disclosed in its December 31 year 2 financial statements?",
+        "bloom_level": "Apply",
+        "pred": "Remember"
+      },
+      {
+        "question": "Increased human populations can lead to the depletion of locally available resources within communities. Compared to other communities, which of these locally available resources is most likely to be depleted in desert communities?",
+        "bloom_level": "Analyze",
+        "pred": "Understand"
+      },
+      {
+        "question": "When he won the dance competition he immediately praised his what?",
+        "bloom_level": "Understand",
+        "pred": "Remember"
+      },
+      {
+        "question": "Find the minimum value of x^2 + y^2, where x and y are real numbers such that x^2 + y^2 = 4xy.",
+        "bloom_level": "Analyze",
+        "pred": "Apply"
+      },
+      {
+        "question": "From the text we know that in America _ .",
+        "bloom_level": "Understand",
+        "pred": "Remember"
+      },
+      {
+        "question": "If the second term of a geometric sequence of real numbers is -2 and the fifth term is 16, then what is the fourteenth term?",
+        "bloom_level": "Apply",
+        "pred": "Remember"
+      },
+      {
+        "question": "When it came to the comparison between Lincoln and Lindbergh, the author held a _ attitude.",
+        "bloom_level": "Understand",
+        "pred": "Remember"
+      },
+      {
+        "question": "What is the ones digit of 7^ 35 when written as an integer?",
+        "bloom_level": "Apply",
+        "pred": "Remember"
+      },
+      {
+        "question": "In the geologic past, abiotic factors such as volcanic eruptions have had an impact on the availability of resources. How can volcanic eruptions impact the availability of resources?",
+        "bloom_level": "Understand",
+        "pred": "Remember"
+      },
+      {
+        "question": "The children shouted when the traveller was taking pictures of them because _ .",
+        "bloom_level": "Understand",
+        "pred": "Remember"
+      },
+      {
+        "question": "Let a, b, and c be distinct real numbers. Simplify the expression ((x + a)^3)/((a - b)(a - c)) + ((x + b)^3)/((b - a)(b - c)) + ((x + c)^3)/((c - a)(c - b)) .",
+        "bloom_level": "Analyze",
+        "pred": "Apply"
+      },
+      {
+        "question": "When might the writer go back home?",
+        "bloom_level": "Understand",
+        "pred": "Remember"
+      },
+      {
+        "question": "The jury deliberated for hours, the choice of passing sentence required them to make a what?",
+        "bloom_level": "Understand",
+        "pred": "Remember"
+      },
+      {
+        "question": "Which of these natural disasters are the most unpredictable?",
+        "bloom_level": "Evaluate",
+        "pred": "Remember"
+      },
+      {
+        "question": "What is (20 * ( (2)/(5) )^2 * ( (3)/(4) )^2 * (5)/(9) )^5 ?",
+        "bloom_level": "Apply",
+        "pred": "Remember"
+      },
+      {
+        "question": "When equal amounts of a strong acid such as hydrochloric acid are mixed with a strong base such as sodium hydroxide, the result is what kind of solution?",
+        "bloom_level": "Understand",
+        "pred": "Remember"
+      },
+      {
+        "question": "Let a, b, c be nonnegative real numbers such that a + b + c = 1. Find the maximum value of (ab)/(a + b) + (ac)/(a + c) + (bc)/(b + c) .",
+        "bloom_level": "Analyze",
+        "pred": "Apply"
+      },
+      {
+        "question": "Most items in retail stores are what even when they are on sale?",
+        "bloom_level": "Understand",
+        "pred": "Remember"
+      }
+    ]
+  },
+  "quantities": {
+    "precision": 1.0,
+    "recall": 0.9285714285714286,
+    "f1": 0.962962962962963
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "weights": {
+    "gbm": 0.4,
+    "bert": 0.5,
+    "bilstm": 0.1
+  },
+  "alpha": 1.0
+}
