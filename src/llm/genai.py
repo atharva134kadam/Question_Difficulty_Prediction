@@ -138,8 +138,8 @@ def rewrite(question: str, direction: str, predictor=None) -> dict:
 
 def _clean_generation(text: str) -> str:
     """Keep only the rewritten question: drop quotes, labels and trailing commentary."""
-    text = text.strip().strip('"').strip()
-    text = re.sub(r'^(rewritten question|question)\s*:\s*', "", text, flags=re.I)
+    text = text.replace("**", "").strip().strip('"').strip()
+    text = re.sub(r'^(rewritten|harder|easier|new)?\s*(question|version)\s*:\s*', "", text, flags=re.I)
     text = re.split(r'"""|\n\s*\n|\n(?:subject|note|explanation|difficulty)\s*:', text, flags=re.I)[0]
     return text.strip().strip('"').strip()
 
