@@ -105,6 +105,16 @@ def predict(q: Q):
     return clean(r)
 
 
+@app.post("/api/pipeline")
+def pipeline(q: Q):
+    """Every intermediate output of one prediction (for the Pipeline visualisation page)."""
+    if not q.question.strip():
+        raise HTTPException(400, "Empty question")
+    from src.pipeline_trace import trace
+    with _lock:
+        return clean(trace(predictor(), q.question.strip()))
+
+
 @app.post("/api/paper")
 async def paper(file: UploadFile | None = File(None)):
     from src.data.extract import extract_questions, read_text

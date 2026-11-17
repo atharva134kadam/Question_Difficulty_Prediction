@@ -18,6 +18,7 @@
     <nav class="nav">
       <a href="#analyze" data-page="analyze"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>Analyze question</a>
       <a href="#paper" data-page="paper"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>Paper analyzer</a>
+      <a href="#pipeline" data-page="pipeline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="6" r="2.2"/><circle cx="19" cy="6" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M7.2 6h9.6M6 8l5 8M18 8l-5 8"/></svg>Pipeline view</a>
       <div class="nav-label">NLP Lab</div>
       <a href="#lab" data-page="lab" data-sub="co1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h10M4 17h7"/></svg>Text pipeline<span class="tag">CO1</span></a>
       <a href="#lab" data-page="lab" data-sub="co2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M8 13s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>Sentiment &amp; IE<span class="tag">CO2</span></a>
@@ -92,6 +93,24 @@
           <div id="r-ai" class="ai-box mt hidden"></div>
         </div>
       </div>
+    </section>
+
+    <!-- ================= PIPELINE ================= -->
+    <section class="page" id="page-pipeline">
+      <div class="page-head">
+        <div><h1>Pipeline view</h1>
+          <p>Follow one question through every step, from the text you type to the final level and score. Each step names the technique and model it uses, explains it in plain words, and shows the real output for your question.</p></div>
+        <span class="chip-co">CO1 → CO4 end to end</span>
+      </div>
+      <div class="card">
+        <textarea id="pl-input" style="min-height:70px" placeholder="Type a question, or pick an example below…"></textarea>
+        <div class="row" style="margin-top:12px;justify-content:space-between">
+          <div class="examples" id="pl-examples" style="margin:0"></div>
+          <button class="btn btn-primary" id="pl-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Run through pipeline</button>
+        </div>
+      </div>
+      <div class="pl-flow mt" id="pl-flow"></div>
+      <div class="pl-stages mt" id="pl-stages"></div>
     </section>
 
     <!-- ================= PAPER ================= -->

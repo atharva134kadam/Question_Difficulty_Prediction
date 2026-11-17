@@ -104,7 +104,7 @@ function miniMarkdown(t) {
 }
 
 /* ---------------------------------------------------------------- router */
-const PAGES = { analyze: initAnalyze, paper: initPaper, lab: initLab, genai: initGenai, report: initReport, datasets: initDatasets };
+const PAGES = { analyze: initAnalyze, pipeline: initPipeline, paper: initPaper, lab: initLab, genai: initGenai, report: initReport, datasets: initDatasets };
 
 function route() {
   const [page, sub] = (location.hash.slice(1) || "analyze").split("/");
@@ -559,4 +559,180 @@ async function loadPage() {
 }
 
 /* ---------------------------------------------------------------- boot */
-route();
+
+/* ================================================================ PIPELINE VIEW */
+const PL_EXAMPLES = [
+  "1+2",
+  "Q2. (a) Explain the process of photosynthesis in green plants. [5 marks]",
+  "Prove that the square root of 2 is irrational.",
+  "Evaluate the impact of the Treaty of Versailles on the rise of fascism in Europe.",
+  "पृथ्वी सूर्य के चारों ओर क्यों घूमती है?",
+];
+const BLOOMS = ["Remember", "Understand", "Apply", "Analyze", "Evaluate", "Create"];
+const PL_WAIT = '<div class="pl-wait">Run a question above to see this step\'s real output.</div>';
+
+const plBars = (pairs, color = "#4f46e5", label = (x) => x) => {
+  const mx = Math.max(...pairs.map((p) => p[1]), 1e-6);
+  return pairs.map(([k, v]) => `<div class="pl-bar"><span class="mono">${esc(label(k))}</span><div class="bar"><span style="width:${(100 * v / mx).toFixed(1)}%;background:${color}"></span></div><span class="num">${v.toFixed(3)}</span></div>`).join("");
+};
+const plOut = (m) => `<div class="pl-mini">${probBars(m.probabilities)}<div class="row" style="justify-content:space-between;margin-top:8px"><span class="muted small">Score <b style="color:var(--text)">${m.score.toFixed(1)}</b>/100</span>${badge(m.level || LEVELS.reduce((a, l) => (m.probabilities[l] > m.probabilities[a] ? l : a), "Easy"))}</div></div>`;
+const kvList = (rows) => `<dl class="kv">${rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("")}</dl>`;
+
+const PL_STAGES = [
+  { id: "input", title: "Input & language check", co: "CO3", tech: ["langdetect", "Devanagari script check", "MarianMT (opus-mt-hi-en / mul-en)"],
+    simple: "First we check which language the question is written in. The models learned from English questions, so a Hindi or Marathi question is translated to English by a small translation model that runs on this computer.",
+    live: (t) => `<div class="pl-box">${esc(t.input)}</div>` + (t.language.translated
+      ? `<div class="pl-arrow">↓ detected <b>${esc(t.language.name)}</b> → translated locally</div><div class="pl-box">${esc(t.english)}</div>`
+      : `<div class="pl-note">✓ Detected <b>${esc(t.language.name)}</b>, so no translation is needed.</div>`) },
+
+  { id: "clean", title: "Text cleaning", co: "CO1", tech: ["Regular expressions", "HTML / URL removal", "LaTeX normalisation", "Numbering & marks removal"],
+    simple: "Real question papers contain noise such as “Q3.”, “[5 marks]”, web links or maths code like \\frac{1}{2}. We strip or normalise this so that only the actual question is left.",
+    live: (t) => `<div class="pl-cmp"><div><div class="lbl">Before</div><div class="pl-box">${esc(t.english)}</div></div><div class="pl-arrow-h">→</div><div><div class="lbl">After</div><div class="pl-box">${esc(t.cleaned)}</div></div></div>` +
+      (t.english.trim() === t.cleaned.trim() ? '<div class="pl-note">The text was already clean, so nothing needed removing.</div>' : "") },
+
+  { id: "tokens", title: "Tokenisation & normalisation", co: "CO1", tech: ["NLTK word tokenizer", "Stop-word removal", "Porter stemmer", "WordNet lemmatizer", "POS tagging"],
+    simple: "The sentence is split into words (tokens). Very common words such as “the” and “is” are marked as stop words, and the remaining words are reduced to their root form (“appears” → “appear”). These clean tokens feed the topic model and the Word2Vec embeddings.",
+    live: (t) => {
+      const p = t.preprocess, sw = new Set(p.without_stopwords);
+      return `<div class="lbl">Tokens <span class="muted">(stop words struck out)</span></div><div class="pl-toks">${p.tokens.map((x) => `<span class="tok ${sw.has(x) ? "" : "sw"}">${esc(x)}</span>`).join("")}</div>
+        <div class="table-wrap mt" style="max-height:none"><table class="tbl"><tbody>
+        <tr><td class="muted">POS tags</td><td>${p.pos_tags.map(([w, g]) => `${esc(w)}<sub class="muted">${esc(g)}</sub>`).join(" ")}</td></tr>
+        <tr><td class="muted">Stems</td><td class="mono">${esc(p.stemmed.join("  "))}</td></tr>
+        <tr><td class="muted">Lemmas</td><td class="mono">${esc(p.lemmatized.join("  "))}</td></tr></tbody></table></div>`;
+    } },
+
+  { id: "vector", title: "Vectorisation (text → numbers)", co: "CO1", tech: ["TF-IDF word 1–2 grams", "TF-IDF character 3–5 grams", "Sparse vectors"],
+    simple: "Models only understand numbers. TF-IDF gives every word or word pair a weight: high if it is rare in general but present in this question. Character pieces such as “sqr” also catch maths and spelling patterns. The result is a very long list of numbers in which almost every value is zero.",
+    live: (t) => {
+      const v = t.tfidf, dim = v.word_dim + v.char_dim, nz = v.word_nonzero + v.char_nonzero;
+      return `<div class="pl-note">Vector size <b>${dim.toLocaleString()}</b>, of which only <b>${nz}</b> values are non-zero (${(100 * nz / dim).toFixed(3)}%).</div>
+        <div class="grid g2 mt"><div><div class="lbl">Top word n-grams (${v.word_nonzero} non-zero)</div>${plBars(v.top_word)}</div>
+        <div><div class="lbl">Top character n-grams (${v.char_nonzero} non-zero)</div>${plBars(v.top_char, "#0ea5e9", (k) => k.replace(/ /g, "␣"))}</div></div>`;
+    } },
+
+  { id: "extract", title: "Understanding the question", co: "CO2 · CO3", tech: ["spaCy NER", "YAKE / TextRank keyphrases", "Bloom's taxonomy rules", "VADER sentiment", "LDA topic model"],
+    simple: "Next we pull out what the question is about and what it asks you to do. Named entities (dates, places, numbers), key phrases, the thinking level from Bloom's taxonomy (remember → create) and the tone. The Bloom level and tone become features in the next step. The topic is shown only as extra insight.",
+    live: (t) => {
+      const i = t.info || {}, s = t.sentiment || {}, tp = t.topic;
+      return kvList([
+        ["Bloom's level", `<b>${esc(i.bloom_level)}</b> <span class="muted small">${esc((i.bloom_indicators || []).join(", "))}</span>`],
+        ["Question type", esc(i.question_type)],
+        ["Entities", (i.entities || []).map((e) => `<span class="pill ent">${esc(e.text)} · ${esc(e.label)}</span>`).join("") || "–"],
+        ["Key phrases", (i.keyphrases_yake || []).slice(0, 5).map((k) => `<span class="pill key">${esc(k)}</span>`).join("") || "–"],
+        ["Tone (VADER)", `${esc(s.vader_label)} (${(s.vader_compound ?? 0).toFixed(2)})`],
+        ["Topic (LDA)", tp && tp.top_words ? esc(tp.top_words.slice(0, 5).join(", ")) : "–"],
+      ]);
+    } },
+
+  { id: "features", title: "Linguistic features (57 numbers)", co: "CO1 · CO2", tech: ["textstat readability", "wordfreq rarity", "spaCy dependency parse", "Bloom's level", "VADER tone"],
+    simple: "We measure the question the way a teacher might judge it. How long is it? Are the words rare? How deeply nested are the sentences? What thinking level does it ask for? These 57 measurements form a profile of the question.",
+    live: (t) => {
+      const f = Object.assign({}, ...Object.values(t.features));
+      const pick = {
+        "Readability": [["FK grade level", f.fk_grade], ["Flesch reading ease", f.flesch_reading_ease], ["Gunning fog", f.gunning_fog], ["Difficult words", f.difficult_words]],
+        "Vocabulary": [["Words", f.n_words], ["Rare-word ratio", f.rare_word_ratio], ["Avg. word frequency (Zipf)", f.mean_zipf], ["Maths symbols", f.n_math_symbols]],
+        "Sentence structure": [["Sentences", f.n_sentences], ["Parse-tree depth", f.max_tree_depth], ["Subordinate clauses", f.n_subordinate], ["Named entities", f.n_entities]],
+        "Thinking & tone": [["Bloom's level", BLOOMS[(f.bloom_level || 1) - 1] || f.bloom_level], ["VADER compound", f.vader_compound], ["Negations", f.n_negations], ["Constraints (exactly, only…)", f.n_constraints]],
+      };
+      const all = Object.entries(t.features).map(([g, d]) => `<div><div class="lbl">${esc(g)}</div>${kvList(Object.entries(d).map(([k, v]) => [esc(featName(k)), fmt(v, 2)]))}</div>`).join("");
+      return `<div class="grid g4">${Object.entries(pick).map(([g, rows]) => `<div class="pl-fgroup"><div class="lbl">${g}</div>${kvList(rows.map(([k, v]) => [k, typeof v === "number" ? fmt(v, 2) : esc(v)]))}</div>`).join("")}</div>
+        <details class="mt"><summary class="small" style="cursor:pointer;color:var(--primary);font-weight:600">Show all ${t.n_features} features</summary><div class="grid g3 mt">${all}</div></details>`;
+    } },
+
+  { id: "models", title: "Three models predict in parallel", co: "CO1 · CO4", tech: ["LightGBM", "DistilBERT (transformer)", "BiLSTM + attention", "SHAP"], lanes: true,
+    simple: "Three different kinds of model look at the question independently. Each one gives a probability for Easy / Medium / Hard and its own 0–100 score. Classic machine learning, a transformer and a recurrent network each notice different things, so combining them is more reliable than trusting just one. All three were trained on the same 35,681 training questions, drawn from 9 public datasets plus a generated arithmetic set." },
+
+  { id: "ensemble", title: "Weighted ensemble", co: "", tech: ["Weighted soft voting", "Weights tuned on validation set", "Band consistency check"],
+    simple: "The models' answers are combined using weights chosen on a validation set that was held out from training. DistilBERT gets 60% of the vote and LightGBM 40%. The BiLSTM gets 0% because adding it did not improve accuracy. Finally the score is kept inside the band of the chosen level, so the level and the score never disagree.",
+    live: (t) => {
+      const e = t.ensemble, m = t.members, names = { gbm: "LightGBM", bert: "DistilBERT", bilstm: "BiLSTM" };
+      const used = Object.entries(e.weights).filter(([, w]) => w > 0);
+      const probRows = LEVELS.map((l) => `<tr><td><b>${l}</b></td><td class="mono">${used.map(([k, w]) => `${w.toFixed(1)} × ${m[k].probabilities[l].toFixed(3)}`).join(" + ")}</td><td class="num">${pct(e.probabilities[l], 1)}</td></tr>`).join("");
+      const sc = used.map(([k, w]) => `${w.toFixed(1)} × ${m[k].score.toFixed(1)}`).join(" + ");
+      const [lo, hi] = e.band;
+      return `<div class="pl-weights">${Object.entries(e.weights).map(([k, w]) => `<div class="pl-w ${w > 0 ? "" : "off"}"><span>${names[k]}</span><b>${Math.round(w * 100)}%</b></div>`).join("")}</div>
+        <div class="lbl mt">① Level probabilities = weighted average</div>
+        <div class="table-wrap" style="max-height:none"><table class="tbl"><tbody>${probRows}</tbody></table></div>
+        <div class="lbl mt">② Difficulty score = weighted average of the models' scores</div>
+        <div class="pl-box mono">${sc}${e.alpha < 1 ? `  (blended ${e.alpha} : ${(1 - e.alpha).toFixed(2)} with expected score ${e.expected_score})` : ""} = <b>${e.raw_score.toFixed(2)}</b></div>
+        <div class="lbl mt">③ Level = highest probability → ${badge(e.level)}</div>
+        <div class="lbl mt">④ Consistency check: ${e.level} band is ${lo}–${hi}</div>
+        <div class="pl-note ${e.clipped ? "warn" : ""}">${e.clipped ? `The raw score ${e.raw_score.toFixed(2)} falls outside the ${e.level} band, so it is moved to the nearest edge: <b>${e.final_score.toFixed(1)}</b>.` : `${e.raw_score.toFixed(2)} is inside the band, so it is kept: <b>${e.final_score.toFixed(1)}</b>.`}</div>`;
+    } },
+
+  { id: "result", title: "Final prediction", co: "", tech: ["Level: Easy / Medium / Hard", "Score: 0–100", "Confidence"],
+    simple: "The output is a difficulty level, a 0–100 score and a confidence, which is how sure the ensemble is about the level. The score bands are Easy 0–33, Medium 33–67 and Hard 67–100.",
+    live: (t) => {
+      const r = t.result;
+      return `<div class="pl-final"><div class="gauge-wrap"><div>${gaugeSVG(r.score, r.level)}</div><div class="gauge-score">${r.score.toFixed(1)}<small>/100</small></div></div>
+        <div style="flex:1;min-width:220px">${badge(r.level, "lg")}<div class="muted small" style="margin:8px 0">Confidence ${pct(r.confidence)}</div>${probBars(r.probabilities)}
+        <a class="btn btn-ghost mt" href="?q=${encodeURIComponent(t.input)}#analyze">Open full analysis →</a></div></div>`;
+    } },
+];
+
+const PL_LANES = [
+  { k: "gbm", name: "LightGBM", kind: "Classic machine learning", tech: ["TF-IDF → LogReg + Ridge", "57 features + 4 = 61 inputs", "Gradient-boosted trees", "SHAP"],
+    simple: "First a quick text model reads the TF-IDF vector and gives 4 numbers. These are added to the 57 features, and a forest of decision trees learns which combinations mean “hard”. SHAP shows which inputs pushed the score up or down.",
+    live: (t) => {
+      const s1 = t.stage1, shap = (t.shap || []).slice(0, 6), mx = Math.max(...shap.map((x) => Math.abs(x[1])), 0.01);
+      return `<div class="lbl">Step A: TF-IDF text model</div><div class="small mono">P = ${LEVELS.map((l) => `${l[0]} ${s1.probabilities[l].toFixed(2)}`).join(" · ")} · score ${s1.score.toFixed(1)}</div>
+        <div class="lbl mt">Step B: LightGBM output</div>${plOut(t.members.gbm)}
+        <div class="lbl mt">Why? Top SHAP contributions</div>${shap.map(([n, v]) => {
+          const w = (Math.abs(v) / mx) * 50, left = v >= 0 ? 50 : 50 - w;
+          return `<div class="shap-row" style="grid-template-columns:110px 1fr 40px"><span title="${esc(n)}">${esc(featName(n))}</span><div class="shap-track"><div class="mid"></div><div class="fill" style="left:${left}%;width:${w}%;background:${v >= 0 ? "#ef4444" : "#22c55e"}"></div></div><span style="text-align:right;color:${v >= 0 ? "#dc2626" : "#16a34a"}">${v >= 0 ? "+" : ""}${v.toFixed(1)}</span></div>`;
+        }).join("")}`;
+    } },
+  { k: "bert", name: "DistilBERT", kind: "Transformer · deep learning", tech: ["WordPiece tokenizer", "6 transformer layers, 66 M parameters", "Classification + regression heads"],
+    simple: "A pre-trained language model that already understands English, fine-tuned on our questions. It splits words into sub-word pieces, reads the whole sentence at once with self-attention, and has two output heads: one picks the level and one gives the score.",
+    live: (t) => `<div class="lbl">Sub-word tokens (${t.bert.n_tokens} of max ${t.bert.max_len})</div><div class="pl-toks">${t.bert.tokens.map((x) => `<span class="tok ${x.startsWith("[") ? "sp" : x.startsWith("##") ? "sub" : ""}">${esc(x)}</span>`).join("")}</div>
+      <div class="lbl mt">Output</div>${plOut(t.members.bert)}` },
+  { k: "bilstm", name: "BiLSTM + attention", kind: "Recurrent network · explainer", tech: ["Word2Vec embeddings", "Bidirectional LSTM", "Attention layer"],
+    simple: "Reads the words left-to-right and right-to-left, and an attention layer learns which words matter most. Its vote weight is 0% because it did not improve the ensemble, but its attention is a nice visual explanation.",
+    live: (t) => {
+      const att = t.attention || [], am = Math.max(...att.map((a) => a[1]), 0.001);
+      return `<div class="lbl">Attention (darker = more important)</div><div class="attn">${att.map(([w, a]) => `<span style="background:rgba(79,70,229,${(0.08 + 0.85 * a / am).toFixed(2)});color:${a / am > 0.55 ? "#fff" : "inherit"}">${esc(w)}</span>`).join("")}</div>
+        <div class="lbl mt">Output</div>${plOut(t.members.bilstm)}`;
+    } },
+];
+
+function plRender(t) {
+  const w = t ? t.ensemble.weights : { gbm: 0.4, bert: 0.6, bilstm: 0 };
+  $("#pl-flow").innerHTML = PL_STAGES.map((s, i) => `<a class="pl-node" href="javascript:void 0" data-id="${s.id}"><span class="n">${i + 1}</span>${esc(s.title.split(" (")[0])}</a>`).join('<span class="pl-chev">›</span>');
+  $$("#pl-flow .pl-node").forEach((a) => a.addEventListener("click", () => document.getElementById("pl-" + a.dataset.id).scrollIntoView({ behavior: "smooth", block: "start" })));
+  $("#pl-stages").innerHTML = PL_STAGES.map((s, i) => {
+    const head = `<div class="pl-head"><h3>${esc(s.title)}</h3>${s.co ? `<span class="chip-co">${s.co}</span>` : ""}</div>
+      <div class="pl-tech">${s.tech.map((x) => `<span>${esc(x)}</span>`).join("")}</div>
+      <div class="pl-simple"><b>In simple words:</b> ${esc(s.simple)}</div>`;
+    let body;
+    if (s.lanes) {
+      body = `<div class="pl-lanes">${PL_LANES.map((l) => `<div class="pl-lane ${w[l.k] > 0 ? "" : "off"}">
+          <div class="row" style="justify-content:space-between"><div><div style="font-weight:700">${l.name}</div><div class="muted small">${l.kind}</div></div><span class="pl-wchip">vote ${Math.round((w[l.k] || 0) * 100)}%</span></div>
+          <div class="pl-tech">${l.tech.map((x) => `<span>${esc(x)}</span>`).join("")}</div>
+          <div class="pl-simple small">${esc(l.simple)}</div>
+          <div class="pl-live">${t ? l.live(t) : PL_WAIT}</div></div>`).join("")}</div>`;
+    } else body = `<div class="pl-live">${t ? s.live(t) : PL_WAIT}</div>`;
+    return `<div class="pl-stage" id="pl-${s.id}"><div class="pl-rail"><span class="pl-num">${i + 1}</span></div><div class="card">${head}${body}</div></div>`;
+  }).join("");
+}
+
+function initPipeline() {
+  $("#pl-examples").innerHTML = PL_EXAMPLES.map((e) => `<span class="ex" title="${esc(e)}">${esc(e.length > 40 ? e.slice(0, 38) + "…" : e)}</span>`).join("");
+  $$("#pl-examples .ex").forEach((el, i) => el.addEventListener("click", () => { $("#pl-input").value = PL_EXAMPLES[i]; runPipeline(); }));
+  $("#pl-go").addEventListener("click", runPipeline);
+  $("#pl-input").addEventListener("keydown", (e) => { if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) runPipeline(); });
+  plRender(null);
+  const q = new URLSearchParams(location.search).get("q");   // e.g. /?q=1%2B2#pipeline
+  if (q) { $("#pl-input").value = q; runPipeline(); }
+}
+
+async function runPipeline() {
+  const q = $("#pl-input").value.trim();
+  if (!q) return toast("Type a question first");
+  await busy($("#pl-go"), async () => {
+    const t = await api("/api/pipeline", { question: q });
+    plRender(t);
+    $$(".pl-stage").forEach((el, i) => { el.style.animationDelay = `${i * 70}ms`; el.classList.add("pl-in"); });
+  });
+}
+
+route();   // keep last: every page constant above must be initialised first

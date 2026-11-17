@@ -117,6 +117,7 @@ ollama pull qwen2.5:1.5b && ollama serve &
 # 3. rebuild everything (or skip: trained models are already in models_store/)
 ./run_pipeline.sh
 # 4. demo: web app at http://localhost:8000
+#    ("Pipeline view" page: one question traced step by step, from raw text to final level + score)
 ./start.sh
 #    (alternative quick UI: .venv/bin/streamlit run app/streamlit_app.py)
 .venv/bin/python -m src.predict "Prove that there are infinitely many primes."
@@ -136,6 +137,7 @@ src/models/          gbm · bilstm · transformer (DistilBERT) · ensemble
 src/multilingual/    language ID, Indic tokenisation, MarianMT translation, evaluation
 src/llm/             local LLM integration + prompt-strategy evaluation
 src/predict.py       DifficultyPredictor (CLI + API used by the app)
+src/pipeline_trace.py step-by-step trace of one prediction (powers the app's Pipeline view)
 prompts/             all prompt templates (prompt engineering)
 app/server.py        FastAPI backend (JSON API, serves the frontend)
 frontend/            DiffiQ web app (HTML/CSS/JS, Chart.js vendored: works offline)

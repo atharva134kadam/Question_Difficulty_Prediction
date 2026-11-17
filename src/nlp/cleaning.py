@@ -69,7 +69,10 @@ def clean_text(text: str, strip_numbering: bool = True) -> str:
     text = URL.sub(" URL ", text)
     text = MARKS.sub(" ", text)
     if strip_numbering:
-        text = NUMBERING.sub("", text)
+        for _ in range(3):            # "Q2. (a) ..." has stacked labels
+            text, n = NUMBERING.subn("", text)
+            if not n:
+                break
     if has_latex(text):
         text = normalise_latex(text)
     text = BLANK.sub(" ___ ", text)
